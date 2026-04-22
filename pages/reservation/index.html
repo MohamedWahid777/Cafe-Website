@@ -1,25 +1,5 @@
 <!doctype html>
-<!--
-  ╔══════════════════════════════════════════════╗
-  ║         EmailJS SETUP REQUIRED               ║
-  ╠══════════════════════════════════════════════╣
-  ║ 1. Go to https://emailjs.com (free account)  ║
-  ║ 2. Add Gmail service → copy SERVICE_ID       ║
-  ║ 3. Create template → copy TEMPLATE_ID        ║
-  ║ 4. Account > API Keys → copy PUBLIC_KEY      ║
-  ║                                              ║
-  ║ Then replace in this file:                   ║
-  ║   YOUR_PUBLIC_KEY   → your public key        ║
-  ║   YOUR_SERVICE_ID   → your service ID        ║
-  ║   YOUR_TEMPLATE_ID  → your template ID       ║
-  ║                                              ║
-  ║ EmailJS Template variables to use:           ║
-  ║   {{type}} {{from_name}} {{phone}}           ║
-  ║   {{email}} {{order_items}} {{total}}        ║
-  ║   {{date}} {{time}} {{guests}}               ║
-  ║   {{notes}} {{booking_time}}                 ║
-  ╚══════════════════════════════════════════════╝
--->
+<!-- Navigation & Content -->
 <html class="light" lang="ar" dir="rtl">
   <head>
     <meta charset="utf-8" />
@@ -31,8 +11,7 @@
     />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
@@ -79,14 +58,7 @@
             },
           },
         },
-      }(
-        // ── EmailJS init ── Replace with your real keys from emailjs.com
-        function () {
-          if (typeof emailjs !== "undefined") {
-            emailjs.init("YOUR_PUBLIC_KEY"); // ← replace
-          }
-        },
-      )();
+      };
     </script>
     <style>
       .material-symbols-outlined {
@@ -248,8 +220,11 @@
           <form
             id="reservation-form"
             class="space-y-8"
-            onsubmit="return false;"
+            action="https://formsubmit.co/wahadmomo@gmail.com"
+            method="POST"
           >
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New Table Reservation - Brew & Soul">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="space-y-2">
                 <label
@@ -352,7 +327,7 @@
                   >Number of Guests</label
                 >
                 <!-- Hidden input so JS can read it -->
-                <input type="hidden" id="res-guests" value="2" />
+                <input type="hidden" id="res-guests" name="guests" value="2" />
                 <div
                   class="flex items-center justify-between bg-surface-container-low rounded-sm px-2 py-2"
                 >
@@ -420,7 +395,7 @@
               </span>
               <button
                 id="confirm-reservation-btn"
-                type="button"
+                type="submit"
                 class="bg-primary-container text-on-primary font-headline text-lg px-10 py-4 rounded-md hover:bg-primary transition-colors duration-300 shadow-[0_8px_40px_-12px_rgba(28,28,25,0.3)]"
                 data-en="Confirm Reservation"
                 data-ar="تأكيد الحجز"
@@ -444,10 +419,10 @@
               Reservation Confirmed!
             </h3>
             <p
-              data-en="We'll see you soon. Check your email for details."
-              data-ar="نراك قريباً. تحقق من بريدك الإلكتروني للتفاصيل."
+              data-en="Thank you. We will contact you using the information you provided. See you soon."
+              data-ar="شكرا  سنتواصل معك عن طرق البيانات المرسله منك نراك قريبا"
             >
-              We'll see you soon. Check your email for details.
+              Thank you. We will contact you using the information you provided. See you soon.
             </p>
             <a
               href="../menu/index.html"
@@ -642,31 +617,22 @@
           if (success) success.classList.remove("hidden");
         }
 
-        document
-          .getElementById("confirm-reservation-btn")
-          .addEventListener("click", function (e) {
+        var formEl = document.getElementById("reservation-form");
+        if (formEl) {
+          formEl.addEventListener("submit", function (e) {
             e.preventDefault();
             const isAr = document.documentElement.lang === "ar";
-
-            // Collect fields
-            const fields = {
-              name: document.getElementById("res-name").value.trim(),
-              email: document.getElementById("res-email").value.trim(),
-              phone: document.getElementById("res-phone").value.trim(),
-              date: document.getElementById("res-date").value,
-              time: document.getElementById("res-time").value,
-              guests: document.getElementById("res-guests").value,
-              notes: document.getElementById("res-notes").value.trim(),
-            };
+            const btn = document.getElementById("confirm-reservation-btn");
 
             if (!validateForm()) return;
 
             // Date must be today or future
-            const chosen = new Date(fields.date);
+            const dateField = document.getElementById("res-date");
+            const chosen = new Date(dateField.value);
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             if (chosen < today) {
-              document.getElementById("res-date").style.borderColor = "#ba1a1a";
+              dateField.style.borderColor = "#ba1a1a";
               alert(
                 isAr
                   ? "يرجى اختيار تاريخ مستقبلي"
@@ -675,58 +641,41 @@
               return;
             }
 
-            const params = {
-              to_email: "wahadmomo@gmail.com",
-              type: "Table Reservation — حجز طاولة",
-              from_name: fields.name,
-              phone: fields.phone,
-              email: fields.email,
-              order_items: "N/A",
-              total: "N/A",
-              date: fields.date,
-              time: fields.time,
-              guests: fields.guests,
-              notes: fields.notes || "لا يوجد",
-              booking_time: new Date().toLocaleString("ar-EG"),
-            };
-
-            const btn = this;
+            const originalText = btn.textContent;
             btn.disabled = true;
             btn.textContent = "⏳ " + (isAr ? "جاري الإرسال..." : "Sending...");
 
-            if (typeof emailjs !== "undefined") {
-              emailjs
-                .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", params)
-                .then(() => {
-                  // Hide form, show success card
-                  document.getElementById("reservation-form").style.display =
-                    "none";
-                  document
-                    .getElementById("reservation-success")
-                    .classList.remove("hidden");
-                  document.getElementById("reservation-success").style.display =
-                    "flex";
-                })
-                .catch((err) => {
-                  console.error(err);
-                  alert(
-                    isAr
-                      ? "فشل الإرسال، حاول مرة أخرى"
-                      : "Send failed, please try again.",
-                  );
-                  btn.disabled = false;
-                  btn.textContent = isAr
-                    ? "تأكيد الحجز"
-                    : "Confirm Reservation";
-                });
-            } else {
+            fetch(formEl.action, {
+              method: formEl.method,
+              body: new FormData(formEl),
+              headers: {
+                  'Accept': 'application/json'
+              }
+            })
+            .then(response => {
+              if (response.ok) {
+                formEl.style.display = "none";
+                document.getElementById("reservation-success").classList.remove("hidden");
+                document.getElementById("reservation-success").style.display = "flex";
+                formEl.reset();
+              } else {
+                throw new Error('Network response was not ok');
+              }
+            })
+            .catch(err => {
+              console.error('Error:', err);
               alert(
-                isAr ? "لم يتم تكوين EmailJS" : "EmailJS is not configured",
+                isAr
+                  ? "فشل الإرسال، حاول مرة أخرى"
+                  : "Send failed, please try again.",
               );
+            })
+            .finally(() => {
               btn.disabled = false;
-              btn.textContent = isAr ? "تأكيد الحجز" : "Confirm Reservation";
-            }
+              btn.textContent = originalText;
+            });
           });
+        }
       })();
     </script>
   </body>

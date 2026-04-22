@@ -1,19 +1,5 @@
 <!doctype html>
-<!--
-  ╔══════════════════════════════════════════════╗
-  ║         EmailJS SETUP REQUIRED               ║
-  ╠══════════════════════════════════════════════╣
-  ║ 1. Go to https://emailjs.com (free account)  ║
-  ║ 2. Add Gmail service → copy SERVICE_ID       ║
-  ║ 3. Create template → copy TEMPLATE_ID        ║
-  ║ 4. Account > API Keys → copy PUBLIC_KEY      ║
-  ║                                              ║
-  ║ Replace in the script below:                 ║
-  ║   YOUR_PUBLIC_KEY   → your public key        ║
-  ║   YOUR_SERVICE_ID   → your service ID        ║
-  ║   YOUR_TEMPLATE_ID  → your template ID       ║
-  ╚══════════════════════════════════════════════╝
--->
+<!-- Page Logic -->
 <html class="light" lang="ar" dir="rtl">
   <head>
     <meta charset="utf-8" />
@@ -25,7 +11,6 @@
     />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
@@ -2230,11 +2215,6 @@
 
       /* ══ CART ══════════════════════════════════════════════════════════════ */
       (function () {
-        // ── EmailJS init ── replace with your real keys
-        if (typeof emailjs !== "undefined") {
-          emailjs.init("YOUR_PUBLIC_KEY"); // ← replace
-        }
-
         var cart = [];
 
         function getIsAr() {
@@ -2392,60 +2372,52 @@
               return s + i.price * i.qty;
             }, 0);
 
-            var params = {
-              to_email: "wahadmomo@gmail.com",
-              type: "Menu Order — طلب قائمة",
-              from_name: name,
-              phone: phone,
-              email: "N/A",
-              order_items: lines,
-              total: "ج.م " + total,
-              date: "N/A",
-              time: "N/A",
-              guests: "N/A",
-              notes: notes || "لا يوجد",
-              booking_time: new Date().toLocaleString("ar-EG"),
-            };
+
 
             var btn = document.getElementById("place-order-btn");
             btn.disabled = true;
             btn.textContent = "⏳";
 
-            if (typeof emailjs === "undefined") {
-              // EmailJS not set up yet — show success anyway for testing
-              setTimeout(function () {
-                cart.length = 0;
-                updateCartUI();
-                closeCart();
-                if (typeof window.showSuccessToast === "function") {
-                  window.showSuccessToast(
-                    isAr
-                      ? "تم إرسال طلبك! سنتواصل معك قريباً ☕"
-                      : "Order sent! We'll contact you shortly ☕",
-                  );
-                }
-                btn.disabled = false;
-                btn.textContent = isAr ? "تأكيد الطلب" : "Place Order";
-              }, 800);
-              return;
-            }
 
-            emailjs
-              .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", params)
-              .then(function () {
-                cart.length = 0;
-                updateCartUI();
-                closeCart();
-                if (typeof window.showSuccessToast === "function") {
-                  window.showSuccessToast(
-                    isAr
-                      ? "تم إرسال طلبك! سنتواصل معك قريباً ☕"
-                      : "Order sent! We'll contact you shortly ☕",
-                  );
+
+            var originalText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = "⏳";
+ 
+            var formData = new FormData();
+            formData.append("_captcha", "false");
+            formData.append("_subject", "New Order - Brew & Soul");
+            formData.append("Customer Name", name);
+            formData.append("Phone", phone);
+            formData.append("Order Items", lines);
+            formData.append("Total", "ج.م " + total);
+            formData.append("Notes", notes || "لا يوجد");
+ 
+            fetch("https://formsubmit.co/wahadmomo@gmail.com", {
+              method: "POST",
+              body: formData,
+              headers: {
+                Accept: "application/json",
+              },
+            })
+              .then(function (response) {
+                if (response.ok) {
+                  cart.length = 0;
+                  updateCartUI();
+                  closeCart();
+                  if (typeof window.showSuccessToast === "function") {
+                    window.showSuccessToast(
+                      isAr
+                        ? "تم إرسال طلبك! سنتواصل معك قريباً ☕"
+                        : "Order sent! We'll contact you shortly ☕",
+                    );
+                  }
+                } else {
+                  throw new Error("Network response was not ok");
                 }
               })
               .catch(function (err) {
-                console.error(err);
+                console.error("Error:", err);
                 alert(
                   isAr
                     ? "فشل الإرسال، حاول مرة أخرى"
@@ -2454,7 +2426,7 @@
               })
               .finally(function () {
                 btn.disabled = false;
-                btn.textContent = isAr ? "تأكيد الطلب" : "Place Order";
+                btn.textContent = originalText;
               });
           });
 

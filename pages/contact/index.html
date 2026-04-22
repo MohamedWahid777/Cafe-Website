@@ -228,10 +228,13 @@
             <form
               id="contact-form"
               class="space-y-6 bg-surface-container-lowest p-8 md:p-10 rounded-xl border border-outline-variant/15 shadow-[0_8px_40px_-12px_rgba(28,28,25,0.06)]"
-              onsubmit="return false;"
+              action="https://formsubmit.co/wahadmomo@gmail.com"
+              method="POST"
               data-aos="fade-up"
               data-aos-delay="80"
             >
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_subject" value="New Contact Message - Brew & Soul">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
                   <label
@@ -348,7 +351,7 @@
 
               <button
                 id="contact-send-btn"
-                type="button"
+                type="submit"
                 class="w-full bg-primary-container text-on-primary font-body font-medium px-8 py-4 rounded-md hover:bg-primary transition-colors duration-300"
                 data-en="Send Message"
                 data-ar="أرسل رسالة"
@@ -451,8 +454,8 @@
                 <p class="font-body text-on-surface leading-relaxed">
                   <span
                     data-en="12 Nile Street, Downtown Cairo"
-                    data-ar="١٢ شارع النيل، وسط البلد، القاهرة"
-                    >12 Nile Street, Downtown Cairo</span
+                    data-ar="وسط البلد، القاهرة"
+                    > Downtown Cairo</span
                   >
                 </p>
               </div>
@@ -513,7 +516,7 @@
                     >call</span
                   >
                   <p class="font-label text-sm text-on-surface-variant">
-                    +20 (10) 234-5678
+                    +20 1063841779
                   </p>
                 </div>
               </div>
@@ -786,19 +789,17 @@
     <script>
       (function () {
         "use strict";
-        var sendBtn = document.getElementById("contact-send-btn");
-        if (!sendBtn) return;
+        var form = document.getElementById("contact-form");
+        if (!form) return;
 
-        sendBtn.addEventListener("click", function () {
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
           var isAr = document.documentElement.lang === "ar";
-          var name = (
-            (document.getElementById("c-firstname") || {}).value || ""
-          ).trim();
-          var msg = (
-            (document.getElementById("c-message") || {}).value || ""
-          ).trim();
+          var sendBtn = document.getElementById("contact-send-btn");
+          var name = (document.getElementById("c-firstname") || {}).value || "";
+          var msg = (document.getElementById("c-message") || {}).value || "";
 
-          if (!name || !msg) {
+          if (!name.trim() || !msg.trim()) {
             if (window.showSuccessToast) {
               window.showSuccessToast(
                 isAr
@@ -809,18 +810,44 @@
             return;
           }
 
-          var form = document.getElementById("contact-form");
-          var success = document.getElementById("contact-success");
+          var originalText = sendBtn.textContent;
+          sendBtn.disabled = true;
+          sendBtn.textContent = "⏳ " + (isAr ? "جاري الإرسال..." : "Sending...");
 
-          // Show success in-place
-          if (form) form.classList.add("hidden");
-          if (success) success.classList.remove("hidden");
-
-          if (window.showSuccessToast) {
-            window.showSuccessToast(
-              isAr ? "تم إرسال رسالتك بنجاح!" : "Message sent successfully!",
+          fetch(form.action, {
+            method: form.method,
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+          })
+          .then(response => {
+            if (response.ok) {
+              form.style.display = "none";
+              var success = document.getElementById("contact-success");
+              if (success) success.classList.remove("hidden");
+              form.reset();
+              if (window.showSuccessToast) {
+                window.showSuccessToast(
+                  isAr ? "تم إرسال رسالتك بنجاح!" : "Message sent successfully!",
+                );
+              }
+            } else {
+              throw new Error('Network response was not ok');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert(
+              isAr
+                ? "فشل الإرسال، حاول مرة أخرى"
+                : "Send failed, please try again.",
             );
-          }
+          })
+          .finally(() => {
+            sendBtn.disabled = false;
+            sendBtn.textContent = originalText;
+          });
         });
       })();
     </script>

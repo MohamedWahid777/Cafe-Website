@@ -1,6 +1,6 @@
 /* ============================================================
    ROAST & RITUAL — menu-filter.js  v2.0
-   Menu filter · Shopping cart · EmailJS orders · FAQ · Counter
+   Menu filter · Shopping cart · FormSubmit orders · FAQ · Counter
    ============================================================ */
 (function () {
   "use strict";
@@ -137,7 +137,7 @@
   }
 
   /* ════════════════════════════════════════
-     PLACE ORDER via EmailJS
+     PLACE ORDER via FormSubmit
   ════════════════════════════════════════ */
   function initPlaceOrder() {
     var btn = document.getElementById("place-order-btn");
@@ -168,55 +168,55 @@
 
       const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
-      const params = {
-        to_email: "wahadmomo@gmail.com",
-        type: "Menu Order — طلب قائمة",
-        from_name: name,
-        phone: phone,
-        email: "N/A",
-        order_items: orderLines,
-        total: "ج.م " + total,
-        date: "N/A",
-        time: "N/A",
-        guests: "N/A",
-        notes: notes || "لا يوجد",
-        booking_time: new Date().toLocaleString("ar-EG"),
-      };
-
       const button = this;
+      const originalText = button.textContent;
       button.disabled = true;
       button.textContent = "⏳";
 
-      if (typeof emailjs !== "undefined") {
-        emailjs
-          .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", params)
-          .then(() => {
-            cart.length = 0;
-            updateCartUI();
-            closeCart();
-            showSuccessToast(
+      const formData = new FormData();
+      formData.append("_captcha", "false");
+      formData.append("_subject", "New Order - Brew & Soul");
+      formData.append("Customer Name", name);
+      formData.append("Phone", phone);
+      formData.append("Order Items", orderLines);
+      formData.append("Total", "ج.م " + total);
+      formData.append("Notes", notes || "لا يوجد");
+
+      fetch("https://formsubmit.co/wahadmomo@gmail.com", {
+        method: "POST",
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          cart.length = 0;
+          updateCartUI();
+          closeCart();
+          if (window.showSuccessToast) {
+            window.showSuccessToast(
               isAr
                 ? "تم إرسال طلبك! سنتواصل معك قريباً ☕"
                 : "Order sent! We'll contact you shortly ☕",
             );
-          })
-          .catch((err) => {
-            console.error(err);
-            alert(
-              isAr
-                ? "فشل الإرسال، حاول مرة أخرى"
-                : "Send failed, please try again.",
-            );
-          })
-          .finally(() => {
-            button.disabled = false;
-            button.textContent = isAr ? "تأكيد الطلب" : "Place Order";
-          });
-      } else {
-        alert(isAr ? "لم يتم تكوين EmailJS" : "EmailJS is not configured");
+          }
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      })
+      .catch((err) => {
+        console.error('Error:', err);
+        alert(
+          isAr
+            ? "فشل الإرسال، حاول مرة أخرى"
+            : "Send failed, please try again.",
+        );
+      })
+      .finally(() => {
         button.disabled = false;
-        button.textContent = isAr ? "تأكيد الطلب" : "Place Order";
-      }
+        button.textContent = originalText;
+      });
     });
   }
 
