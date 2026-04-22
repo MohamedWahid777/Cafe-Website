@@ -1,0 +1,440 @@
+<!doctype html>
+<html class="light" lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Story — Roast &amp; Ritual</title>
+    <meta
+      name="description"
+      content="Discover the origin of Roast &amp; Ritual — rooted in ritual, crafted for the curious palate."
+    />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <link rel="stylesheet" href="../../assets/css/shared.css" />
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#e5e2dd",
+              primary: "#090100",
+              "surface-container-high": "#ebe8e3",
+              "secondary-fixed": "#ffddb0",
+              surface: "#fcf9f4",
+              "surface-container-low": "#f6f3ee",
+              "secondary-container": "#fddaac",
+              "surface-container": "#f0ede9",
+              secondary: "#735a36",
+              "surface-variant": "#e5e2dd",
+              "on-primary": "#ffffff",
+              "primary-fixed-dim": "#e3bfb2",
+              "surface-dim": "#dcdad5",
+              "on-surface-variant": "#504440",
+              "surface-container-lowest": "#ffffff",
+              "primary-container": "#2c1810",
+              "on-surface": "#1c1c19",
+              background: "#fcf9f4",
+              "outline-variant": "#d3c3be",
+              outline: "#827470",
+              "on-secondary": "#ffffff",
+              "on-secondary-container": "#785e39",
+              "on-primary-container": "#9e7e73",
+              "secondary-fixed-dim": "#e2c195",
+              "on-background": "#1c1c19",
+            },
+            fontFamily: {
+              headline: ["Cormorant Garamond", "serif"],
+              body: ["Outfit", "sans-serif"],
+              label: ["DM Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+
+  <body class="bg-surface text-on-surface font-body antialiased">
+    <!-- ══ NAVBAR ══════════════════════════════════════════════════════════ -->
+    <header id="main-nav">
+      <div class="nav-inner">
+        <a href="../../index.html" class="nav-logo">Café</a>
+        <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+          <a href="../../index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+          <a href="../menu/index.html" data-en="Menu" data-ar="القائمة">Menu</a>
+          <a href="../story/index.html" data-en="Our Story" data-ar="قصتنا"
+            >Our Story</a
+          >
+          <a
+            href="../reservation/index.html"
+            data-en="Reservations"
+            data-ar="الحجوزات"
+            >Reservations</a
+          >
+          <a href="../contact/index.html" data-en="Contact" data-ar="تواصل معنا"
+            >Contact</a
+          >
+        </nav>
+        <div class="nav-controls">
+          <button id="lang-toggle" class="nav-btn" aria-label="Switch language">
+            ع
+          </button>
+          <button
+            id="theme-toggle"
+            class="nav-btn material-symbols-outlined"
+            data-theme-icon
+            aria-label="Toggle dark mode"
+          >
+            dark_mode
+          </button>
+          <a
+            href="../reservation/index.html"
+            class="nav-cta"
+            data-en="Book a Table"
+            data-ar="احجز طاولة"
+            >Book a Table</a
+          >
+          <button
+            id="hamburger"
+            class="nav-btn material-symbols-outlined"
+            aria-label="Open menu"
+          >
+            menu
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="mobile-overlay" aria-hidden="true"></div>
+
+    <div
+      id="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Navigation menu"
+    >
+      <div class="mobile-menu-header">
+        <a href="../../index.html" class="mobile-menu-logo">Café</a>
+        <button
+          id="mobile-menu-close"
+          class="material-symbols-outlined"
+          aria-label="Close menu"
+        >
+          close
+        </button>
+      </div>
+      <nav class="mobile-menu-links" aria-label="Mobile navigation">
+        <a
+          href="../../index.html"
+          class="mob-link"
+          data-en="Home"
+          data-ar="الرئيسية"
+          >Home</a
+        >
+        <a
+          href="../menu/index.html"
+          class="mob-link"
+          data-en="Menu"
+          data-ar="القائمة"
+          >Menu</a
+        >
+        <a
+          href="../story/index.html"
+          class="mob-link"
+          data-en="Our Story"
+          data-ar="قصتنا"
+          >Our Story</a
+        >
+        <a
+          href="../reservation/index.html"
+          class="mob-link"
+          data-en="Reservations"
+          data-ar="الحجوزات"
+          >Reservations</a
+        >
+        <a
+          href="../contact/index.html"
+          class="mob-link"
+          data-en="Contact"
+          data-ar="تواصل معنا"
+          >Contact</a
+        >
+      </nav>
+      <div class="mobile-menu-footer">
+        <a
+          href="../reservation/index.html"
+          class="mob-cta"
+          data-en="Book a Table"
+          data-ar="احجز طاولة"
+          >Book a Table</a
+        >
+      </div>
+    </div>
+
+    <!-- ══ MAIN ════════════════════════════════════════════════════════════ -->
+    <main class="pt-32">
+      <!-- ── Hero: Split Layout ── -->
+      <section
+        class="min-h-[820px] flex flex-col md:flex-row px-8 md:px-16 lg:px-24 gap-12 md:gap-16 items-center py-16"
+      >
+        <div
+          class="w-full md:w-1/2 h-[500px] md:h-[820px] rounded-xl overflow-hidden shadow-[0_8px_40px_rgba(28,28,25,0.06)]"
+          data-aos="fade-right"
+        >
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuApU6NGi1h5xLn295VkRIXZfKm9jlQZYirS7msd6U_XF2iIrHfWDjzWZVOGKBYw6oV5mswPJOFFbGqQypCaVSZrNPMH2TXMyhcbWmPBDa3MhvOio7hByUSC3_Kvf4lXCTrEnkuxnwRuUgGArE5l33x0kBPlwo1PQP0lOy0431YBMsivX0wur0vf_QCe6VtGtadKvpzU4JwCGTF9x9ftCfU0d2pBmXUNo3kjFGFsW-s8EJr1xhxBtF9bEAK1h6zI1hfUxkjojIe9x_Y"
+            alt="Barista pouring latte art in warm café lighting"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <div
+          class="w-full md:w-1/2 flex flex-col justify-center max-w-xl"
+          data-aos="fade-left"
+          data-aos-delay="100"
+        >
+          <span
+            class="font-label text-secondary tracking-widest uppercase text-xs mb-4"
+            data-en="The Genesis"
+            data-ar="البداية"
+            >The Genesis</span
+          >
+          <h1
+            class="font-headline text-5xl md:text-7xl font-bold tracking-tight text-primary-container leading-none mb-8"
+          >
+            <span class="block" data-en="Rooted in" data-ar="متخصص في"
+              >Rooted in</span
+            >
+            <span
+              class="block italic text-secondary"
+              data-en="Ritual."
+              data-ar="القهوه."
+              >Ritual.</span
+            >
+          </h1>
+          <div
+            class="space-y-5 text-on-surface-variant font-body text-lg leading-relaxed"
+          >
+            <p
+              data-en="In the heart of Cairo's vibrant pulse, we found our calling: to curate a space where time slows down. Roast &amp; Ritual was born from a desire to reclaim the sacred pause that a perfect cup affords."
+              data-ar="في قلب نبض القاهرة النابض، وجدنا دعوتنا: لتنسيق مساحة حيث يتباطأ الوقت. ولدت 'المقهى' من الرغبة في استعادة الوقفة المقدسة التي يمنحها الكوب المثالي."
+            >
+              In the heart of Cairo's vibrant pulse, we found our calling: to
+              curate a space where time slows down. Roast &amp; Ritual was born
+              from a desire to reclaim the sacred pause that a perfect cup
+              affords.
+            </p>
+            <p
+              data-en="We believe coffee is more than just a beverage; it is a profound connection to the earth and a catalyst for human intimacy. Our space is an invitation to be present, where the aroma of freshly ground beans marks the transition from chaos to clarity."
+              data-ar="نحن نؤمن بأن القهوة هي أكثر من مجرد مشروب؛ إنها صلة عميقة بالأرض ومحفز للألفة الإنسانية. مساحتنا هي دعوة للحضور، حيث تمثل رائحة الحبوب المطحونة طازجاً الانتقال من الفوضى إلى الصفاء."
+            >
+              We believe coffee is more than just a beverage; it is a profound
+              connection to the earth and a catalyst for human intimacy. Our
+              space is an invitation to be present, where the aroma of freshly
+              ground beans marks the transition from chaos to clarity.
+            </p>
+            <p
+              data-en="Our journey is a continuous love letter to the craft. We obsess over the nuance of every roast, not out of vanity, but because we believe a truly exceptional cup honors the hands that nurtured the harvest."
+              data-ar="رحلتنا هي رسالة حب مستمرة للحرفة. نحن نهتم بكل تفاصيل التحميص، ليس من قبيل الغرور، ولكن لأننا نؤمن بأن الكوب الاستثنائي حقاً يكرم الأيدي التي رعت المحصول."
+            >
+              Our journey is a continuous love letter to the craft. We obsess
+              over the nuance of every roast, not out of vanity, but because we
+              believe a truly exceptional cup honors the hands that nurtured the
+              harvest.
+            </p>
+          </div>
+          <a
+            href="../menu/index.html"
+            class="inline-flex items-center mt-10 text-primary-container font-body font-medium hover:text-secondary transition-colors border-b border-primary-container/20 hover:border-secondary pb-1 w-fit"
+          >
+            <span data-en="Explore Our Menu" data-ar="استكشف قائمتنا"
+              >Explore Our Menu</span
+            >
+            <span class="material-symbols-outlined ml-2 text-base"
+              >arrow_forward</span
+            >
+          </a>
+        </div>
+      </section>
+
+      <!-- ── Our Values ── -->
+      <section class="py-24 px-8 md:px-16 lg:px-24 bg-surface mt-32">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-16" data-aos="fade-up">
+            <h2
+              class="font-headline text-4xl text-primary-container mb-4"
+              data-en="Our Values"
+              data-ar="قيمنا"
+            >
+              Our Values
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div data-aos="fade-up" data-aos-delay="0">
+              <div
+                class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center mx-auto mb-4"
+              >
+                <span
+                  class="material-symbols-outlined text-2xl text-secondary"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >workspace_premium</span
+                >
+              </div>
+              <h4
+                class="font-headline text-xl text-primary-container mb-3"
+                data-en="Quality"
+                data-ar="الجودة"
+              >
+                Quality
+              </h4>
+              <p
+                class="font-body text-sm text-on-surface-variant leading-relaxed"
+                data-en="Every cup is a deliberate act. We accept nothing less than the finest, from farm to filter."
+                data-ar="كل كوب هو عمل متعمد. لا نقبل بأقل من الأفضل، من المزرعة إلى الفلتر."
+              >
+                Every cup is a deliberate act. We accept nothing less than the
+                finest, from farm to filter.
+              </p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="100">
+              <div
+                class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center mx-auto mb-4"
+              >
+                <span
+                  class="material-symbols-outlined text-2xl text-secondary"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >eco</span
+                >
+              </div>
+              <h4
+                class="font-headline text-xl text-primary-container mb-3"
+                data-en="Sustainability"
+                data-ar="الاستدامة"
+              >
+                Sustainability
+              </h4>
+              <p
+                class="font-body text-sm text-on-surface-variant leading-relaxed"
+                data-en="Ethical sourcing, biodegradable packaging, zero-waste roasting — the planet is our priority."
+                data-ar="مصادر أخلاقية، تغليف قابل للتحلل، تحميص بلا نفايات — كوكبنا هو أولويتنا."
+              >
+                Ethical sourcing, biodegradable packaging, zero-waste roasting —
+                the planet is our priority.
+              </p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200">
+              <div
+                class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center mx-auto mb-4"
+              >
+                <span
+                  class="material-symbols-outlined text-2xl text-secondary"
+                  style="font-variation-settings: &quot;FILL&quot; 1"
+                  >handshake</span
+                >
+              </div>
+              <h4
+                class="font-headline text-xl text-primary-container mb-3"
+                data-en="Community"
+                data-ar="المجتمع"
+              >
+                Community
+              </h4>
+              <p
+                class="font-body text-sm text-on-surface-variant leading-relaxed"
+                data-en="We invest in the neighborhoods we serve and the farmers who make everything possible."
+                data-ar="نحن نستثمر في المانطق التي نخدمها والمزارعين الذين يجعلون كل شيء ممكناً."
+              >
+                We invest in the neighborhoods we serve and the farmers who make
+                everything possible.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
+    <footer
+      class="bg-[#2C1810] text-[#F5ECD7] font-body text-sm py-20 px-8 md:px-12"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+        <div>
+          <div class="font-headline text-3xl text-[#735a36] mb-4">Café</div>
+          <p class="text-stone-400 mt-4">
+            <span
+              data-en="© 2025 Café. All rights reserved."
+              data-ar="© 2025 مقهي. جميع الحقوق محفوظة."
+              >© 2025 Café. All rights reserved.</span
+            >
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <a
+            class="text-stone-400 hover:text-[#735a36] transition-all"
+            href="#"
+            data-en="Privacy Policy"
+            data-ar="سياسة الخصوصية"
+            >Privacy Policy</a
+          >
+          <a
+            class="text-stone-400 hover:text-[#735a36] transition-all"
+            href="#"
+            data-en="Terms of Service"
+            data-ar="شروط الاستخدام"
+            >Terms of Service</a
+          >
+        </div>
+        <div class="flex flex-col gap-3">
+          <p
+            class="font-label text-xs text-[#735a36] uppercase tracking-widest mb-1"
+            data-en="Find Us"
+            data-ar="موقعنا"
+          >
+            Find Us
+          </p>
+          <p
+            class="text-stone-400"
+            data-en="Downtown Cairo"
+            data-ar="وسط البلد، القاهرة"
+          >
+            وسط البلد، القاهرة
+          </p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <p
+            class="font-label text-xs text-[#735a36] uppercase tracking-widest mb-1"
+            data-en="Follow Us"
+            data-ar="تابعنا"
+          >
+            Follow Us
+          </p>
+          <a
+            class="text-stone-400 hover:text-[#735a36] transition-all"
+            href="#"
+            data-en="Instagram"
+            data-ar="إنستغرام"
+            >Instagram</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="../../assets/js/main.js"></script>
+  </body>
+</html>

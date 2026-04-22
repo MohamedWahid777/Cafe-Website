@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Brew &amp; Soul - Specialty Café</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&amp;family=Inter:wght@100..900&amp;family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#cec6b2",
+                        "surface-container-highest": "#e5e2dd",
+                        "on-tertiary-container": "#8b8573",
+                        "on-primary-fixed": "#2a170f",
+                        "primary": "#090100",
+                        "surface-container-high": "#ebe8e3",
+                        "secondary-fixed": "#ffddb0",
+                        "surface": "#fcf9f4",
+                        "on-secondary-container": "#785e39",
+                        "tertiary": "#040300",
+                        "on-tertiary-fixed": "#1f1b0f",
+                        "inverse-on-surface": "#f3f0eb",
+                        "on-tertiary-fixed-variant": "#4b4637",
+                        "secondary-fixed-dim": "#e2c195",
+                        "primary-fixed": "#ffdbce",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#281800",
+                        "inverse-surface": "#31302d",
+                        "surface-container-low": "#f6f3ee",
+                        "on-primary-fixed-variant": "#5a4137",
+                        "secondary-container": "#fddaac",
+                        "surface-tint": "#74584e",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0ede9",
+                        "secondary": "#735a36",
+                        "surface-variant": "#e5e2dd",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#e3bfb2",
+                        "on-secondary-fixed-variant": "#594320",
+                        "surface-bright": "#fcf9f4",
+                        "surface-dim": "#dcdad5",
+                        "on-surface-variant": "#504440",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ebe2cd",
+                        "on-primary-container": "#9e7e73",
+                        "on-background": "#1c1c19",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#211d10",
+                        "inverse-primary": "#e3bfb2",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#2c1810",
+                        "on-surface": "#1c1c19",
+                        "background": "#fcf9f4",
+                        "outline-variant": "#d3c3be",
+                        "outline": "#827470",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Noto Serif", "serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["DM Mono", "monospace"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: theme('colors.background');
+            color: theme('colors.on-surface');
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, h5, h6, .font-headline {
+            font-family: 'Noto Serif', serif;
+        }
+        .font-label {
+            font-family: 'DM Mono', monospace;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full flex justify-between items-center px-8 py-6 max-w-full bg-stone-50/70 dark:bg-stone-950/70 backdrop-blur-xl docked full-width z-50 tonal shift via surface-container-low shadow-sm shadow-[#2C1810]/5 transition-all duration-300">
+<div class="text-2xl font-black text-[#2C1810] dark:text-[#F5ECD7] tracking-tighter font-headline">
+            Brew &amp; Soul
+        </div>
+<nav class="hidden md:flex space-x-8 items-center font-notoSerif tracking-widest uppercase text-sm">
+<a class="text-[#2C1810] dark:text-stone-300 hover:text-[#735a36] transition-colors duration-300" href="#">Our Story</a>
+<a class="text-[#2C1810] dark:text-stone-300 hover:text-[#735a36] transition-colors duration-300" href="#">The Coffee</a>
+<a class="text-[#2C1810] dark:text-stone-300 hover:text-[#735a36] transition-colors duration-300" href="#">Menu</a>
+<a class="text-[#2C1810] dark:text-stone-300 hover:text-[#735a36] transition-colors duration-300" href="#">Wholesale</a>
+<a class="text-[#2C1810] dark:text-stone-300 hover:text-[#735a36] transition-colors duration-300" href="#">Location</a>
+</nav>
+<div class="flex items-center">
+<button class="bg-primary-container text-on-primary px-6 py-2 rounded-md hover:bg-primary transition-colors duration-300 font-body text-sm font-medium tracking-wide">
+                Book a Table
+            </button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+<!-- Abstract Background -->
+<div class="absolute inset-0 z-0 flex">
+<div class="w-1/2 h-full bg-gradient-to-br from-primary to-primary-container"></div>
+<div class="w-1/2 h-full bg-surface-container-low"></div>
+</div>
+<!-- Hero Image Overlay (Placeholder for actual image) -->
+<div class="absolute inset-0 z-10 opacity-30 mix-blend-overlay" data-alt="Close up of dark, rich espresso being extracted from a professional machine into a ceramic cup, warm lighting, moody atmosphere" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDgEjajVKrvRAbI2DLImKeHDtCPWyrHzx0CvKF89OsITyrC-IrWqHbD8wSYt1FWjjgQLiz05mUMybt8k9HfWrzcPHTPavFraFIbK7-e1_cOYgMDkY-vIFLQrNYfQoF8kHTJPjaxLyvhVA3bgI7SI75sBOLNU_pCUyCmMi5Ubvr3DMFaRXJc9f72LfWOc09PopjwHaHhi1Mylh4sUzEHm1wZTk8hGiRC6oSixO0fIQcoAiOJSiA5us0zc7TaiZsgCT1AKtDch1TAtC8'); background-size: cover; background-position: center;">
+</div>
+<div class="container mx-auto px-6 relative z-20 flex flex-col md:flex-row items-center justify-between">
+<div class="w-full md:w-5/12 text-on-primary pl-0 md:pl-12">
+<h1 class="font-headline text-5xl md:text-7xl font-light tracking-wider leading-tight mb-6">
+                    Every Sip<br/>Tells a Story
+                </h1>
+<p class="font-body text-lg text-surface-variant/80 max-w-md mb-10 font-light leading-relaxed">
+                    Experience the culmination of passion, precision, and the finest beans. A sanctuary for those who understand that coffee is an art form.
+                </p>
+<div class="flex flex-wrap gap-6 items-center">
+<button class="bg-surface text-primary-container px-8 py-3 rounded-md hover:bg-surface-variant transition-colors duration-300 font-body tracking-wide font-medium">
+                        Explore Menu
+                    </button>
+<button class="text-on-primary px-8 py-3 rounded-md border border-outline-variant/30 hover:border-surface transition-colors duration-300 font-body tracking-wide">
+                        Book a Table
+                    </button>
+</div>
+</div>
+<!-- Asymmetric decorative element -->
+<div class="w-full md:w-5/12 mt-16 md:mt-0 relative hidden md:block">
+<div class="aspect-[3/4] bg-secondary-fixed-dim/20 rounded-t-full overflow-hidden relative shadow-2xl shadow-primary/20 backdrop-blur-sm">
+<div class="absolute inset-4 rounded-t-full overflow-hidden">
+<img alt="Barista carefully pouring latte art into a ceramic cup, soft natural light, shallow depth of field" class="w-full h-full object-cover mix-blend-luminosity opacity-80" data-alt="Barista carefully pouring latte art into a ceramic cup, soft natural light, shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-CNw-jC9dp0mpOxJ2NINwhQ3sQlYCSoLROLDNTv5hbhVCTgJ5mdfgF64QW_799kwFLxgYoF5FghlZIZnp2RdNq2qmsJ2uR80lpUsqVy7Tm1nd7Z3A58IoPZp93HJoIfosv-TL9s-pBfx32OtpsOCDEn6srSFw_h9OHVEJHZ1ag5liKkiutVG09VzknuCYpWKzCJLoZ5hlCWfntkt860dHxUawofJA0WCJN-VWWSJUrjdApH_yjEKiD4b-S-F65HPBwL25qcHiz1c"/>
+</div>
+</div>
+<!-- Floating Badge -->
+<div class="absolute -bottom-6 -left-12 bg-surface-container-lowest p-6 rounded-md shadow-[0_8px_40px_rgba(28,28,25,0.06)] backdrop-blur-md border border-outline-variant/15">
+<p class="font-label text-xs tracking-widest text-secondary uppercase mb-1">Origin</p>
+<p class="font-headline text-xl text-primary-container">Antigua, Guatemala</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Our Story Teaser -->
+<section class="py-24 bg-surface relative z-30">
+<div class="container mx-auto px-6">
+<div class="max-w-4xl mx-auto text-center">
+<p class="font-label text-sm tracking-widest text-secondary mb-6 uppercase">The Philosophy</p>
+<h2 class="font-headline text-3xl md:text-5xl text-primary-container leading-tight mb-8">
+                    Rooted in tradition, crafted for the modern palate. We source ethically, roast meticulously, and pour with intention.
+                </h2>
+<a class="inline-flex items-center text-primary-container font-body font-medium hover:text-secondary transition-colors duration-300 border-b border-primary-container/20 hover:border-secondary pb-1" href="#">
+                    Discover Our Story
+                    <span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Featured Section: Signature Drinks -->
+<section class="py-32 bg-surface-container-low relative">
+<div class="container mx-auto px-6">
+<div class="flex flex-col md:flex-row justify-between items-end mb-20">
+<div>
+<h2 class="font-headline text-4xl text-primary-container tracking-wide mb-4">Curated Selections</h2>
+<p class="font-body text-on-surface-variant max-w-md">Our signature preparations, designed to highlight the unique terroir of each bean.</p>
+</div>
+<div class="mt-6 md:mt-0">
+<button class="text-primary-container font-body text-sm font-medium hover:text-secondary transition-colors duration-300">
+                        View Full Menu
+                    </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Drink 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container mb-6 overflow-hidden relative">
+<img alt="Top down view of a perfect flat white in a dark ceramic cup on a wooden table, soft window light" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Top down view of a perfect flat white in a dark ceramic cup on a wooden table, soft window light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW2w2O-yz4oVUf3vmatEtJFmHCcOaYYsTM3RJzDeeueOeove1RyQdeWZjjI1CRlNOT0O0mUkkbShOEIaUTqJMGrKo84Otxjj1637DJkE5yHnKwPLOCGIz3OKxeXMj0ub5K4ruwoJ9GGx9cslwhaUPUx0mFXH36HZA_37QhSMPVcN6zlsAGO0oKLZDKBxfg5PbzrOS7lJUElVwT-CSOUuAcO0__6jKaQNfS5lLr4CId6qTpZYxhQKMyyqCIVwmBXvNyM2zVchWsUqo"/>
+<div class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-sm">
+<span class="font-label text-xs text-primary-container">Single Origin</span>
+</div>
+</div>
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline text-2xl text-primary-container">The Artisan Pour</h3>
+<span class="font-label text-sm text-secondary">$6.50</span>
+</div>
+<p class="font-body text-sm text-on-surface-variant mb-4 leading-relaxed">
+                        A delicate pour-over highlighting bright floral notes and a clean, honeyed finish. Served at optimal extraction temperature.
+                    </p>
+<div class="flex gap-2">
+<span class="font-label text-[10px] uppercase bg-surface-container px-2 py-1 text-on-surface-variant">Jasmine</span>
+<span class="font-label text-[10px] uppercase bg-surface-container px-2 py-1 text-on-surface-variant">Honey</span>
+</div>
+</div>
+<!-- Drink 2 -->
+<div class="group cursor-pointer md:mt-16">
+<div class="aspect-[4/5] bg-surface-container mb-6 overflow-hidden relative">
+<img alt="Dark moody shot of an espresso tonic with a slice of dried orange, condensation on the glass" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Dark moody shot of an espresso tonic with a slice of dried orange, condensation on the glass" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ4Q7RCFnZ01ojJhCK5Mf_Nd4r2Q0CqYTRynmC1As12pwSADjqZ3RwbLO03EgEKfhp1W0NtETl7hGV3Wvy21ez1QmGN_Zp6LEClP8yQ0hzqlgjZ2GaCsgIZd_z2tYJ7MRScQQLvRRtZbv7SDaf7R5q35QvrN-o3rkDOkMUMXY15zrxD9u3y23d0ZRGRQqycobkBStjfVUjJjlb_tXbDfMJcKR7uCEsTJCA9uKoeaDC7tmn91LR9zdRujY9LP6hiL5sxgVZZUDtFas"/>
+<div class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-sm">
+<span class="font-label text-xs text-primary-container">House Blend</span>
+</div>
+</div>
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline text-2xl text-primary-container">Midnight Tonic</h3>
+<span class="font-label text-sm text-secondary">$7.00</span>
+</div>
+<p class="font-body text-sm text-on-surface-variant mb-4 leading-relaxed">
+                        Double ristretto over artisanal tonic water, garnished with dehydrated blood orange. A refreshing, complex juxtaposition.
+                    </p>
+<div class="flex gap-2">
+<span class="font-label text-[10px] uppercase bg-surface-container px-2 py-1 text-on-surface-variant">Citrus</span>
+<span class="font-label text-[10px] uppercase bg-surface-container px-2 py-1 text-on-surface-variant">Cacao</span>
+</div>
+</div>
+<!-- Drink 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] bg-surface-container mb-6 overflow-hidden relative">
+<img alt="Close up of a cortado in a clear gibraltar glass showing the beautiful layers of espresso and textured milk" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close up of a cortado in a clear gibraltar glass showing the beautiful layers of espresso and textured milk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA069nuCEbEbduI1_56NHfjyyd4BBiQm87TOL5_4Vg-QRxVnBEAKQVxxU3kumsXUBQgIriaoCWE4MNSEEc8ar1Lr0UWzcsmzlm5TyfEb9_qaT7-HBg7d2xqGCN0nLEJJhLTLgjVnB2xC46tN21itll06hfpsjabRa9dXTeElcgV0xHvzV-d62gdXwepusELcH8RnrfrFFEhcgfHLqf9P8NX7NSFeyvFL2vR3Dw-NpDBBLUjT52caeh0X1vTW3eoYQUsnKKfaPP4QOc"/>
+<div class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-sm">
+<span class="font-label text-xs text-primary-container">Reserve</span>
+</div>
+</div>
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline text-2xl text-primary-container">Velvet Cortado</h3>
+<span class="font-label text-sm text-secondary">$5.50</span>
+</div>
+<p class="font-body text-sm text-on-surface-variant mb-4 leading-relaxed">
+                        Equal parts rich espresso and micro-foamed milk. A perfect balance of intensity and creamy sweetness.
+                    </p>
+<div class="flex gap-2">
+<span class="font-label text-[10px] uppercase bg-surface-container px-2 py-1 text-on-surface-variant">Caramel</span>
+<span class="font-label text-[10px] uppercase bg-surface-container px-2 py-1 text-on-surface-variant">Nutmeg</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-24 bg-surface relative">
+<div class="container mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+<!-- Testimonial 1 -->
+<div class="flex flex-col items-start">
+<div class="flex text-secondary mb-6">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-headline text-lg text-primary-container italic mb-6 leading-relaxed">
+                        "An absolute sanctuary in the city. The attention to detail in their pour-over process is unmatched. It’s not just coffee; it’s an experience."
+                    </p>
+<div class="mt-auto">
+<p class="font-label text-sm text-on-surface-variant">Elena R.</p>
+<p class="font-body text-xs text-outline mt-1">Local Guide</p>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="flex flex-col items-start md:mt-12">
+<div class="flex text-secondary mb-6">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-headline text-lg text-primary-container italic mb-6 leading-relaxed">
+                        "The Midnight Tonic changed my perception of cold coffee entirely. The atmosphere feels like a hidden Parisian literary salon."
+                    </p>
+<div class="mt-auto">
+<p class="font-label text-sm text-on-surface-variant">Marcus T.</p>
+<p class="font-body text-xs text-outline mt-1">Design Director</p>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="flex flex-col items-start">
+<div class="flex text-secondary mb-6">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-headline text-lg text-primary-container italic mb-6 leading-relaxed">
+                        "Finally, a café that respects the bean. The baristas are incredibly knowledgeable without being pretentious. My morning ritual."
+                    </p>
+<div class="mt-auto">
+<p class="font-label text-sm text-on-surface-variant">Sarah J.</p>
+<p class="font-body text-xs text-outline mt-1">Coffee Enthusiast</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="py-32 bg-surface-container-high">
+<div class="container mx-auto px-6">
+<div class="max-w-2xl mx-auto text-center">
+<h2 class="font-headline text-3xl text-primary-container mb-4">Join the Ritual</h2>
+<p class="font-body text-on-surface-variant mb-10">Subscribe for seasonal release notes, brewing guides, and exclusive invitations to cupping events.</p>
+<form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+<input class="flex-1 bg-surface-container-lowest border-none rounded-sm px-4 py-3 font-label text-sm focus:ring-1 focus:ring-secondary text-on-surface placeholder:text-outline-variant transition-shadow" placeholder="Your email address" type="email"/>
+<button class="bg-primary-container text-on-primary px-8 py-3 rounded-md hover:bg-primary transition-colors duration-300 font-body font-medium tracking-wide" type="submit">
+                        Subscribe
+                    </button>
+</form>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-[#2C1810] dark:bg-black text-[#F5ECD7] full-width py-20 px-12 no-line boundary shift flat no shadows">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 w-full max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="font-notoSerif text-3xl text-[#735a36] mb-4 font-headline">Brew &amp; Soul</div>
+<p class="font-inter text-sm tracking-normal text-stone-400 mt-4">
+                    Elevating the everyday through meticulous craft and intentional design.
+                </p>
+</div>
+<div class="md:col-span-2 grid grid-cols-2 gap-8">
+<div>
+<h4 class="font-label text-xs uppercase tracking-widest text-[#735a36] mb-6">Explore</h4>
+<ul class="space-y-4 font-inter text-sm tracking-normal">
+<li><a class="text-stone-400 hover:text-[#735a36] transition-all" href="#">Our Story</a></li>
+<li><a class="text-stone-400 hover:text-[#735a36] transition-all" href="#">The Coffee</a></li>
+<li><a class="text-stone-400 hover:text-[#735a36] transition-all" href="#">Menu</a></li>
+<li><a class="text-stone-400 hover:text-[#735a36] transition-all" href="#">Wholesale</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label text-xs uppercase tracking-widest text-[#735a36] mb-6">Legal</h4>
+<ul class="space-y-4 font-inter text-sm tracking-normal">
+<li><a class="text-stone-400 hover:text-[#735a36] transition-all focus-within:ring-1 ring-[#735a36]" href="#">Privacy Policy</a></li>
+<li><a class="text-stone-400 hover:text-[#735a36] transition-all focus-within:ring-1 ring-[#735a36]" href="#">Terms of Service</a></li>
+<li><a class="text-stone-400 hover:text-[#735a36] transition-all focus-within:ring-1 ring-[#735a36]" href="#">Sustainability</a></li>
+<li><a class="text-stone-400 hover:text-[#735a36] transition-all focus-within:ring-1 ring-[#735a36]" href="#">Careers</a></li>
+</ul>
+</div>
+</div>
+<div class="md:col-span-1">
+<h4 class="font-label text-xs uppercase tracking-widest text-[#735a36] mb-6">Visit Us</h4>
+<p class="font-inter text-sm tracking-normal text-stone-400 leading-loose">
+                    124 Artisan Alley<br/>
+                    Creative District, NY 10012<br/>
+<br/>
+                    Mon-Fri: 7am - 6pm<br/>
+                    Sat-Sun: 8am - 5pm
+                </p>
+</div>
+</div>
+<div class="mt-20 pt-8 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-xs text-stone-500 font-inter">
+<p>© 2024 Brew &amp; Soul. Artisanal Rituals.</p>
+<div class="flex space-x-4 mt-4 md:mt-0">
+<a class="hover:text-[#735a36] transition-colors" href="#">IG</a>
+<a class="hover:text-[#735a36] transition-colors" href="#">TW</a>
+<a class="hover:text-[#735a36] transition-colors" href="#">IN</a>
+</div>
+</div>
+</footer>
+</body></html>

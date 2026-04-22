@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Brew &amp; Soul - Book a Table</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Noto+Serif:wght@300;400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for a premium feel */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fcf9f4; }
+        ::-webkit-scrollbar-thumb { background: #e5e2dd; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #dcdad5; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#cec6b2",
+                        "surface-container-highest": "#e5e2dd",
+                        "on-tertiary-container": "#8b8573",
+                        "on-primary-fixed": "#2a170f",
+                        "primary": "#090100",
+                        "surface-container-high": "#ebe8e3",
+                        "secondary-fixed": "#ffddb0",
+                        "surface": "#fcf9f4",
+                        "on-secondary-container": "#785e39",
+                        "tertiary": "#040300",
+                        "on-tertiary-fixed": "#1f1b0f",
+                        "inverse-on-surface": "#f3f0eb",
+                        "on-tertiary-fixed-variant": "#4b4637",
+                        "secondary-fixed-dim": "#e2c195",
+                        "primary-fixed": "#ffdbce",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#281800",
+                        "inverse-surface": "#31302d",
+                        "surface-container-low": "#f6f3ee",
+                        "on-primary-fixed-variant": "#5a4137",
+                        "secondary-container": "#fddaac",
+                        "surface-tint": "#74584e",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0ede9",
+                        "secondary": "#735a36",
+                        "surface-variant": "#e5e2dd",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#e3bfb2",
+                        "on-secondary-fixed-variant": "#594320",
+                        "surface-bright": "#fcf9f4",
+                        "surface-dim": "#dcdad5",
+                        "on-surface-variant": "#504440",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ebe2cd",
+                        "on-primary-container": "#9e7e73",
+                        "on-background": "#1c1c19",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#211d10",
+                        "inverse-primary": "#e3bfb2",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#2c1810",
+                        "on-surface": "#1c1c19",
+                        "background": "#fcf9f4",
+                        "outline-variant": "#d3c3be",
+                        "outline": "#827470",
+                        "on-secondary": "#ffffff"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Noto Serif", "serif"],
+                        body: ["Inter", "sans-serif"],
+                        label: ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopNavBar -->
+<nav class="bg-stone-50/70 dark:bg-stone-950/70 backdrop-blur-xl docked full-width top-0 z-50 shadow-sm shadow-[#2C1810]/5 fixed top-0 w-full flex justify-between items-center px-8 py-6 max-w-full">
+<div class="text-2xl font-black text-[#2C1810] dark:text-[#F5ECD7] tracking-tighter">Brew &amp; Soul</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-notoSerif tracking-widest uppercase text-sm text-[#2C1810] dark:text-stone-300 hover:text-[#735a36] transition-colors duration-300" href="#">Our Story</a>
+<a class="font-notoSerif tracking-widest uppercase text-sm text-[#2C1810] dark:text-stone-300 hover:text-[#735a36] transition-colors duration-300" href="#">The Coffee</a>
+<a class="font-notoSerif tracking-widest uppercase text-sm text-[#2C1810] dark:text-stone-300 hover:text-[#735a36] transition-colors duration-300" href="#">Menu</a>
+<a class="font-notoSerif tracking-widest uppercase text-sm text-[#2C1810] dark:text-stone-300 hover:text-[#735a36] transition-colors duration-300" href="#">Wholesale</a>
+<a class="font-notoSerif tracking-widest uppercase text-sm text-[#2C1810] dark:text-stone-300 hover:text-[#735a36] transition-colors duration-300" href="#">Location</a>
+</div>
+<button class="font-notoSerif tracking-widest uppercase text-sm bg-primary-container text-on-primary px-6 py-2 rounded-md hover:bg-primary transition-colors duration-300">
+            Book a Table
+        </button>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-40 pb-32 px-6 md:px-12 max-w-[1400px] mx-auto min-h-screen">
+<!-- Intentional Asymmetry Header -->
+<div class="mb-24 md:ml-12 max-w-3xl">
+<h1 class="font-headline text-5xl md:text-7xl text-primary leading-[1.1] tracking-tight mb-6">
+                Reserve Your Space
+            </h1>
+<p class="font-body text-lg md:text-xl text-on-surface-variant max-w-xl font-light leading-relaxed">
+                Join us for an uninterrupted moment of clarity. Select your preferred time and allow us to prepare your table.
+            </p>
+</div>
+<!-- Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative">
+<!-- Form Area (Left, wider) -->
+<div class="lg:col-span-7">
+<form class="space-y-10">
+<!-- Guest Details Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-3">
+<label class="font-label text-sm uppercase tracking-widest text-on-surface-variant ml-1" for="name">Full Name</label>
+<input class="w-full bg-surface-container-low border-none rounded-sm px-4 py-4 text-primary font-body placeholder:text-outline-variant focus:ring-1 focus:ring-secondary transition-all" id="name" placeholder="Jane Doe" type="text"/>
+</div>
+<div class="space-y-3">
+<label class="font-label text-sm uppercase tracking-widest text-on-surface-variant ml-1" for="email">Email Address</label>
+<input class="w-full bg-surface-container-low border-none rounded-sm px-4 py-4 text-primary font-body placeholder:text-outline-variant focus:ring-1 focus:ring-secondary transition-all" id="email" placeholder="jane@example.com" type="email"/>
+</div>
+</div>
+<div class="space-y-3">
+<label class="font-label text-sm uppercase tracking-widest text-on-surface-variant ml-1" for="phone">Phone Number</label>
+<input class="w-full bg-surface-container-low border-none rounded-sm px-4 py-4 text-primary font-body placeholder:text-outline-variant focus:ring-1 focus:ring-secondary transition-all" id="phone" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+<!-- Date, Time, Guests Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6">
+<div class="space-y-3">
+<label class="font-label text-sm uppercase tracking-widest text-on-surface-variant ml-1" for="date">Date</label>
+<input class="w-full bg-surface-container-low border-none rounded-sm px-4 py-4 text-primary font-body focus:ring-1 focus:ring-secondary transition-all cursor-pointer" id="date" type="date"/>
+</div>
+<div class="space-y-3">
+<label class="font-label text-sm uppercase tracking-widest text-on-surface-variant ml-1" for="time">Time</label>
+<input class="w-full bg-surface-container-low border-none rounded-sm px-4 py-4 text-primary font-body focus:ring-1 focus:ring-secondary transition-all cursor-pointer" id="time" type="time"/>
+</div>
+<div class="space-y-3">
+<label class="font-label text-sm uppercase tracking-widest text-on-surface-variant ml-1">Guests</label>
+<div class="flex items-center justify-between bg-surface-container-low rounded-sm px-2 py-2">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">remove</span>
+</button>
+<span class="font-body text-lg text-primary select-none">2</span>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Special Requests -->
+<div class="space-y-3 pt-6">
+<label class="font-label text-sm uppercase tracking-widest text-on-surface-variant ml-1" for="requests">Special Requests <span class="text-outline-variant lowercase tracking-normal">(Optional)</span></label>
+<textarea class="w-full bg-surface-container-low border-none rounded-sm px-4 py-4 text-primary font-body placeholder:text-outline-variant focus:ring-1 focus:ring-secondary transition-all resize-none" id="requests" placeholder="Allergies, seating preferences, or special occasions..." rows="4"></textarea>
+</div>
+<!-- Submit Action -->
+<div class="pt-8 flex items-center justify-between">
+<span class="font-label text-xs text-outline-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">lock</span> Secure Booking
+                        </span>
+<button class="bg-primary-container text-on-primary font-headline text-lg px-10 py-4 rounded-md hover:bg-primary transition-colors duration-300 shadow-[0_8px_40px_-12px_rgba(28,28,25,0.3)]" type="button">
+                            Confirm Reservation
+                        </button>
+</div>
+</form>
+</div>
+<!-- Sidebar Info (Right, narrower, floating effect) -->
+<aside class="lg:col-span-5 relative mt-12 lg:mt-0">
+<div class="bg-surface-container-highest rounded-xl p-10 lg:p-14 sticky top-32 flex flex-col gap-12">
+<div>
+<h3 class="font-headline text-2xl text-primary mb-6">The Ritual Space</h3>
+<p class="font-body text-on-surface-variant leading-relaxed text-sm mb-8">
+                            Our tables are set for those who appreciate the slow pour. If you arrive late, your table will be held for 15 minutes before being offered to waiting guests.
+                        </p>
+</div>
+<div class="space-y-8">
+<div>
+<p class="font-label text-xs uppercase tracking-widest text-secondary mb-2">Location</p>
+<p class="font-body text-primary text-base">
+                                14 Rue de l'Artisan<br/>
+                                75003 Paris, France
+                            </p>
+</div>
+<div>
+<p class="font-label text-xs uppercase tracking-widest text-secondary mb-2">Hours</p>
+<div class="grid grid-cols-2 gap-2 text-sm font-body text-primary">
+<span>Mon - Fri</span>
+<span class="text-right">7:00 AM - 6:00 PM</span>
+<span>Sat - Sun</span>
+<span class="text-right">8:00 AM - 5:00 PM</span>
+</div>
+</div>
+</div>
+<!-- Map Placeholder -->
+<div class="w-full h-48 bg-tertiary-fixed-dim rounded-sm relative overflow-hidden mt-4 group">
+<img alt="Map of location" class="w-full h-full object-cover opacity-80 mix-blend-multiply group-hover:scale-105 transition-transform duration-700" data-alt="stylized elegant minimal street map of paris focusing on the marais district with warm coffee toned aesthetic" data-location="Paris" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9GwtaFP4fvc30-yPV-WxvbYTy40CvYoV2gwU5PdcUVwrfmtokNx6OpTKI7nABkSX8WPGdyMkxnEKAcX3a0HB-6DBspvF9WU_EpZgAoSBsVpzSyDfKBEh-RX7NtQb1X3Pmdk_1yPcij8m7hAWljFRQJhiG8WI9y5L07vhjX62S_AbRYte9pEyPepd9oJ84iOv6-NHlbWgV5cxkbZ3_3Z6mRxM9tzCs_iqLbvgUyMwq9f9jVPuswPY6Un80eYBXJLE9oarqJhMlaUs"/>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Hidden Confirmation Modal Overlay (For demonstration of requested feature) -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6" id="success-modal">
+<div class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-[20px]"></div>
+<div class="relative bg-surface rounded-xl p-12 md:p-16 max-w-lg w-full text-center shadow-[0_20px_60px_-15px_rgba(28,28,25,0.15)] ring-1 ring-outline-variant/15">
+<div class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center mx-auto mb-8">
+<span class="material-symbols-outlined text-4xl text-on-secondary-container">check</span>
+</div>
+<h2 class="font-headline text-3xl text-primary mb-4">Table Secured</h2>
+<p class="font-body text-on-surface-variant mb-10 leading-relaxed">
+                Your reservation has been confirmed. A detailed summary has been sent to your email. We look forward to hosting you.
+            </p>
+<button class="bg-surface-container-low text-primary border border-outline-variant/30 font-label text-sm uppercase tracking-widest px-8 py-3 rounded-sm hover:bg-surface-container transition-colors">
+                Return to Home
+            </button>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-[#2C1810] dark:bg-black text-[#F5ECD7] font-inter text-sm tracking-normal full-width py-20 px-12 grid grid-cols-1 md:grid-cols-4 gap-12 w-full">
+<div class="md:col-span-1">
+<h2 class="font-notoSerif text-3xl text-[#735a36] mb-4">Brew &amp; Soul</h2>
+<p class="text-stone-400 mt-6 max-w-xs leading-relaxed">
+                © 2024 Brew &amp; Soul. Artisanal Rituals.
+            </p>
+</div>
+<div class="flex flex-col gap-4">
+<a class="text-stone-400 hover:text-[#735a36] transition-all" href="#">Privacy Policy</a>
+<a class="text-stone-400 hover:text-[#735a36] transition-all" href="#">Terms of Service</a>
+<a class="text-stone-400 hover:text-[#735a36] transition-all" href="#">Sustainability</a>
+<a class="text-stone-400 hover:text-[#735a36] transition-all" href="#">Careers</a>
+</div>
+</footer>
+</body></html>

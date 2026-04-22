@@ -1,0 +1,2465 @@
+<!doctype html>
+<!--
+  ╔══════════════════════════════════════════════╗
+  ║         EmailJS SETUP REQUIRED               ║
+  ╠══════════════════════════════════════════════╣
+  ║ 1. Go to https://emailjs.com (free account)  ║
+  ║ 2. Add Gmail service → copy SERVICE_ID       ║
+  ║ 3. Create template → copy TEMPLATE_ID        ║
+  ║ 4. Account > API Keys → copy PUBLIC_KEY      ║
+  ║                                              ║
+  ║ Replace in the script below:                 ║
+  ║   YOUR_PUBLIC_KEY   → your public key        ║
+  ║   YOUR_SERVICE_ID   → your service ID        ║
+  ║   YOUR_TEMPLATE_ID  → your template ID       ║
+  ╚══════════════════════════════════════════════╝
+-->
+<html class="light" lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>القائمة — Roast &amp; Ritual</title>
+    <meta
+      name="description"
+      content="قائمة مشروبات Roast &amp; Ritual — إسبريسو، كولد برو، مشروبات مميزة، وقهوة تقليدية. مختارة بعناية ومُعدّة باحتراف."
+    />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <link rel="stylesheet" href="../../assets/css/shared.css" />
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#e5e2dd",
+              primary: "#090100",
+              "surface-container-high": "#ebe8e3",
+              "secondary-fixed": "#ffddb0",
+              surface: "#fcf9f4",
+              "on-secondary-container": "#785e39",
+              "secondary-fixed-dim": "#e2c195",
+              "primary-fixed": "#ffdbce",
+              "on-secondary-fixed": "#281800",
+              "inverse-surface": "#31302d",
+              "surface-container-low": "#f6f3ee",
+              "on-primary-fixed-variant": "#5a4137",
+              "secondary-container": "#fddaac",
+              "surface-tint": "#74584e",
+              error: "#ba1a1a",
+              "surface-container": "#f0ede9",
+              secondary: "#735a36",
+              "surface-variant": "#e5e2dd",
+              "on-primary": "#ffffff",
+              "primary-fixed-dim": "#e3bfb2",
+              "surface-bright": "#fcf9f4",
+              "surface-dim": "#dcdad5",
+              "on-surface-variant": "#504440",
+              "tertiary-fixed": "#ebe2cd",
+              "on-primary-container": "#9e7e73",
+              "on-background": "#1c1c19",
+              "surface-container-lowest": "#ffffff",
+              "primary-container": "#2c1810",
+              "on-surface": "#1c1c19",
+              background: "#fcf9f4",
+              "outline-variant": "#d3c3be",
+              outline: "#827470",
+              "on-secondary": "#ffffff",
+            },
+            fontFamily: {
+              headline: ["Cormorant Garamond", "serif"],
+              body: ["Outfit", "sans-serif"],
+              label: ["DM Mono", "monospace"],
+            },
+          },
+        },
+      }(function () {
+        if (localStorage.getItem("bs_theme") === "dark")
+          document.documentElement.classList.add("dark");
+      })();
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .section-divider {
+        display: none;
+      }
+      .section-divider.visible {
+        display: flex;
+      }
+      /* card hover ring fix for dark */
+      html.dark article {
+        ring-color: rgba(200, 169, 126, 0.25) !important;
+      }
+    </style>
+  </head>
+
+  <body class="bg-background text-on-surface font-body antialiased">
+    <!-- ══ NAVBAR ═══════════════════════════════════════════════════════════ -->
+    <header id="main-nav">
+      <div class="nav-inner">
+        <a href="../../index.html" class="nav-logo">Café</a>
+        <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+          <a href="../../index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+          <a href="../menu/index.html" data-en="Menu" data-ar="القائمة">Menu</a>
+          <a href="../story/index.html" data-en="Our Story" data-ar="قصتنا"
+            >Our Story</a
+          >
+          <a
+            href="../reservation/index.html"
+            data-en="Reservations"
+            data-ar="الحجوزات"
+            >Reservations</a
+          >
+          <a href="../contact/index.html" data-en="Contact" data-ar="تواصل معنا"
+            >Contact</a
+          >
+        </nav>
+        <div class="nav-controls">
+          <button id="lang-toggle" class="nav-btn" aria-label="Switch language">
+            ع
+          </button>
+          <button
+            id="theme-toggle"
+            class="nav-btn material-symbols-outlined"
+            data-theme-icon
+            aria-label="Toggle dark mode"
+          >
+            dark_mode
+          </button>
+          <a
+            href="../reservation/index.html"
+            class="nav-cta"
+            data-en="Book a Table"
+            data-ar="احجز طاولة"
+            >Book a Table</a
+          >
+          <button
+            id="hamburger"
+            class="nav-btn material-symbols-outlined"
+            aria-label="Open menu"
+          >
+            menu
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="mobile-overlay" aria-hidden="true"></div>
+    <div
+      id="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Navigation menu"
+    >
+      <div class="mobile-menu-header">
+        <a href="../../index.html" class="mobile-menu-logo">Café</a>
+        <button
+          id="mobile-menu-close"
+          class="material-symbols-outlined"
+          aria-label="Close menu"
+        >
+          close
+        </button>
+      </div>
+      <nav class="mobile-menu-links" aria-label="Mobile navigation">
+        <a
+          href="../../index.html"
+          class="mob-link"
+          data-en="Home"
+          data-ar="الرئيسية"
+          >Home</a
+        >
+        <a
+          href="../menu/index.html"
+          class="mob-link"
+          data-en="Menu"
+          data-ar="القائمة"
+          >Menu</a
+        >
+        <a
+          href="../story/index.html"
+          class="mob-link"
+          data-en="Our Story"
+          data-ar="قصتنا"
+          >Our Story</a
+        >
+        <a
+          href="../reservation/index.html"
+          class="mob-link"
+          data-en="Reservations"
+          data-ar="الحجوزات"
+          >Reservations</a
+        >
+        <a
+          href="../contact/index.html"
+          class="mob-link"
+          data-en="Contact"
+          data-ar="تواصل معنا"
+          >Contact</a
+        >
+      </nav>
+      <div class="mobile-menu-footer">
+        <a
+          href="../reservation/index.html"
+          class="mob-cta"
+          data-en="Book a Table"
+          data-ar="احجز طاولة"
+          >Book a Table</a
+        >
+      </div>
+    </div>
+
+    <!-- ══ CART FAB ══════════════════════════════════════════════════════════ -->
+    <button id="cart-btn" class="cart-fab" aria-label="Open cart">
+      <span class="material-symbols-outlined" style="font-size: 1.5rem"
+        >shopping_bag</span
+      >
+      <span id="cart-count" class="cart-badge">0</span>
+    </button>
+
+    <!-- ══ CART DRAWER ════════════════════════════════════════════════════════ -->
+    <div id="cart-drawer" class="cart-drawer" role="dialog" aria-modal="true">
+      <div class="cart-header">
+        <h3 data-en="Your Order" data-ar="طلبك">طلبك</h3>
+        <button
+          id="close-cart"
+          class="material-symbols-outlined"
+          aria-label="Close cart"
+        >
+          close
+        </button>
+      </div>
+      <div id="cart-items" class="cart-items">
+        <p id="cart-empty" data-en="Cart is empty" data-ar="السلة فارغة">
+          السلة فارغة
+        </p>
+      </div>
+      <div id="cart-footer" class="cart-footer hidden">
+        <div class="cart-subtotal">
+          <span data-en="Subtotal" data-ar="المجموع">المجموع</span>
+          <span id="cart-total">ج.م 0</span>
+        </div>
+        <input
+          type="text"
+          id="order-name"
+          placeholder="اسمك"
+          data-placeholder-en="Your Name"
+          data-placeholder-ar="اسمك"
+        />
+        <input
+          type="tel"
+          id="order-phone"
+          placeholder="رقم هاتفك"
+          data-placeholder-en="Phone Number"
+          data-placeholder-ar="رقم هاتفك"
+        />
+        <textarea
+          id="order-notes"
+          rows="2"
+          placeholder="ملاحظات خاصة"
+          data-placeholder-en="Special Notes"
+          data-placeholder-ar="ملاحظات خاصة"
+        ></textarea>
+        <button
+          id="place-order-btn"
+          data-en="Place Order"
+          data-ar="تأكيد الطلب"
+        >
+          تأكيد الطلب
+        </button>
+      </div>
+    </div>
+    <div id="cart-overlay" class="cart-overlay hidden"></div>
+
+    <!-- ══ MAIN ═══════════════════════════════════════════════════════════════ -->
+    <main class="pt-28 pb-24 px-4 md:px-10 max-w-screen-2xl mx-auto">
+      <!-- Page Header -->
+      <section class="mb-12 md:mb-20 text-center" data-aos="fade-up">
+        <p
+          class="font-label text-xs text-secondary uppercase tracking-widest mb-3"
+          data-en="Roast & Ritual"
+          data-ar="روست آند ريتشوال"
+        >
+          روست آند ريتشوال
+        </p>
+        <h1
+          class="font-headline text-5xl md:text-7xl text-primary-container tracking-wide mb-4"
+          data-en="The Menu"
+          data-ar="القائمة"
+        >
+          القائمة
+        </h1>
+        <p
+          class="font-body text-base text-on-surface-variant max-w-lg mx-auto font-light leading-relaxed"
+          data-en="Carefully sourced, expertly crafted — every cup a ritual."
+          data-ar="مختارة بعناية، مُعدّة باحتراف — كل كوب طقس خاص."
+        >
+          مختارة بعناية، مُعدّة باحتراف — كل كوب طقس خاص.
+        </p>
+      </section>
+
+      <!-- Sticky Filters -->
+      <div
+        class="sticky top-[68px] z-40 bg-background/85 backdrop-blur-xl py-4 mb-12 -mx-4 px-4 md:mx-0 md:px-0 border-b border-outline-variant/20 overflow-x-auto no-scrollbar"
+      >
+        <div
+          id="filter-bar"
+          class="flex gap-2 md:gap-3 md:justify-center min-w-max mx-auto"
+        >
+          <button
+            class="menu-filter-btn px-5 py-2 rounded-full font-label text-xs uppercase tracking-wider active"
+            data-filter="all"
+            data-en="All"
+            data-ar="الكل"
+          >
+            الكل
+          </button>
+          <button
+            class="menu-filter-btn px-5 py-2 rounded-full font-label text-xs uppercase tracking-wider"
+            data-filter="espresso"
+            data-en="Espresso Bar"
+            data-ar="إسبريسو بار"
+          >
+            إسبريسو بار
+          </button>
+          <button
+            class="menu-filter-btn px-5 py-2 rounded-full font-label text-xs uppercase tracking-wider"
+            data-filter="milk"
+            data-en="Milk Coffee"
+            data-ar="مشروبات اللبن"
+          >
+            مشروبات اللبن
+          </button>
+          <button
+            class="menu-filter-btn px-5 py-2 rounded-full font-label text-xs uppercase tracking-wider"
+            data-filter="iced"
+            data-en="Iced Coffee"
+            data-ar="مثلجة"
+          >
+            مثلجة
+          </button>
+          <button
+            class="menu-filter-btn px-5 py-2 rounded-full font-label text-xs uppercase tracking-wider"
+            data-filter="specialty"
+            data-en="Specialty"
+            data-ar="مشروبات مميزة"
+          >
+            مشروبات مميزة
+          </button>
+          <button
+            class="menu-filter-btn px-5 py-2 rounded-full font-label text-xs uppercase tracking-wider"
+            data-filter="traditional"
+            data-en="Traditional"
+            data-ar="تقليدي"
+          >
+            تقليدي
+          </button>
+        </div>
+      </div>
+
+      <!-- Cards Grid -->
+      <div
+        id="menu-grid"
+        class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-10"
+      >
+        <!-- ─── SECTION: إسبريسو بار ─────────────────────────── -->
+        <div
+          class="col-span-full section-divider visible items-center gap-4"
+          data-section="espresso"
+        >
+          <div class="h-px flex-1 bg-outline-variant/30"></div>
+          <span
+            class="font-label text-xs text-secondary uppercase tracking-widest whitespace-nowrap"
+            data-en="Espresso Bar"
+            data-ar="إسبريسو بار"
+            >إسبريسو بار</span
+          >
+          <div class="h-px flex-1 bg-outline-variant/30"></div>
+        </div>
+
+        <!-- Espresso Single -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="espresso"
+          data-aos="fade-up"
+          data-aos-delay="0"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Espresso.jpg"
+              alt="Espresso"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Espresso"
+                data-ar="إسبريسو"
+              >
+                إسبريسو
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 55</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="A concentrated shot of pure espresso — rich body, sweet crema, bold finish."
+              data-ar="شوت تركيز خالص — جسم ثقيل، كريما حلوة، ونهاية جريئة."
+            >
+              شوت تركيز خالص — جسم ثقيل، كريما حلوة، ونهاية جريئة.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Espresso"
+                data-name-ar="إسبريسو"
+                data-price="55"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Double Espresso -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="espresso"
+          data-aos="fade-up"
+          data-aos-delay="50"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Double Espresso Chiaro Recipe.jpg"
+              alt="Double Espresso"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute top-3 start-3">
+              <span
+                class="bg-primary-container text-on-primary font-label text-[10px] px-2.5 py-1 rounded-sm uppercase tracking-wider"
+                data-en="Double Shot"
+                data-ar="دبل شوت"
+                >دبل شوت</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Double Espresso"
+                data-ar="إسبريسو دبل"
+              >
+                إسبريسو دبل
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 75</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Two shots of espresso for double the intensity and depth."
+              data-ar="شوتين إسبريسو لضعف الكثافة والعمق."
+            >
+              شوتين إسبريسو لضعف الكثافة والعمق.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Double Espresso"
+                data-name-ar="إسبريسو دبل"
+                data-price="75"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Americano -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="espresso"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Americano.jpg"
+              alt="Americano"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Americano"
+                data-ar="أمريكانو"
+              >
+                أمريكانو
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 65</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Espresso diluted with hot water — smooth, clean, and full-bodied."
+              data-ar="إسبريسو ممزوج بالماء الساخن — ناعم ونظيف وذو جسم كامل."
+            >
+              إسبريسو ممزوج بالماء الساخن — ناعم ونظيف وذو جسم كامل.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Americano"
+                data-name-ar="أمريكانو"
+                data-price="65"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Cappuccino -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="espresso"
+          data-aos="fade-up"
+          data-aos-delay="0"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Cappuccino.jpg"
+              alt="Cappuccino"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Cappuccino"
+                data-ar="كابتشينو"
+              >
+                كابتشينو
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 85</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Equal parts espresso, steamed milk, and thick velvety foam."
+              data-ar="أجزاء متساوية من الإسبريسو واللبن المبخر والرغوة المخملية."
+            >
+              أجزاء متساوية من الإسبريسو واللبن المبخر والرغوة المخملية.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Cappuccino"
+                data-name-ar="كابتشينو"
+                data-price="85"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Latte -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="espresso"
+          data-aos="fade-up"
+          data-aos-delay="50"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Latte.jpg"
+              alt="Latte"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute top-3 start-3">
+              <span
+                class="bg-background/90 backdrop-blur text-primary-container font-label text-[10px] px-2.5 py-1 rounded-sm uppercase tracking-wider"
+                data-en="Best Seller"
+                data-ar="الأكثر طلباً"
+                >الأكثر طلباً</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Latte"
+                data-ar="لاتيه"
+              >
+                لاتيه
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 95</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Double shot topped with silky steamed milk and a thin layer of microfoam."
+              data-ar="شوت مزدوج مع لبن مبخر حريري وطبقة خفيفة من الرغوة الدقيقة."
+            >
+              شوت مزدوج مع لبن مبخر حريري وطبقة خفيفة من الرغوة الدقيقة.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Latte"
+                data-name-ar="لاتيه"
+                data-price="95"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Flat White -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="espresso"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Flat White.jpg"
+              alt="Flat White"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Flat White"
+                data-ar="فلات وايت"
+              >
+                فلات وايت
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 95</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Ristretto double shot with velvety microfoam — stronger ratio than a latte."
+              data-ar="ريستريتو دبل مع رغوة مخملية — نسبة قهوة أعلى من اللاتيه."
+            >
+              ريستريتو دبل مع رغوة مخملية — نسبة قهوة أعلى من اللاتيه.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Flat White"
+                data-name-ar="فلات وايت"
+                data-price="95"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Macchiato -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="espresso"
+          data-aos="fade-up"
+          data-aos-delay="0"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Latte Macchiato Recipe for Home Baristas.jpg"
+              alt="Macchiato"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Macchiato"
+                data-ar="ماكياتو"
+              >
+                ماكياتو
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 75</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Espresso 'marked' with a dollop of steamed milk foam."
+              data-ar="إسبريسو مميز بقليل من رغوة اللبن المبخر."
+            >
+              إسبريسو مميز بقليل من رغوة اللبن المبخر.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Macchiato"
+                data-name-ar="ماكياتو"
+                data-price="75"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Cortado -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="espresso"
+          data-aos="fade-up"
+          data-aos-delay="50"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Cortado.jpg"
+              alt="Cortado"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Cortado"
+                data-ar="كورتادو"
+              >
+                كورتادو
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 85</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Equal ratio of espresso to warm milk — cuts the acidity, keeps the soul."
+              data-ar="نسبة متساوية من الإسبريسو واللبن الدافئ — يُخفف الحموضة ويحافظ على الروح."
+            >
+              نسبة متساوية من الإسبريسو واللبن الدافئ.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Cortado"
+                data-name-ar="كورتادو"
+                data-price="85"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ─── SECTION: مشروبات اللبن ──────────────────────── -->
+        <div
+          class="col-span-full section-divider visible items-center gap-4"
+          data-section="milk"
+        >
+          <div class="h-px flex-1 bg-outline-variant/30"></div>
+          <span
+            class="font-label text-xs text-secondary uppercase tracking-widest whitespace-nowrap"
+            data-en="Milk Coffee"
+            data-ar="مشروبات اللبن"
+            >مشروبات اللبن</span
+          >
+          <div class="h-px flex-1 bg-outline-variant/30"></div>
+        </div>
+
+        <!-- Caramel Macchiato -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="milk"
+          data-aos="fade-up"
+          data-aos-delay="0"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Hot Caramel Macchiato.jpg"
+              alt="Caramel Macchiato"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute top-3 start-3">
+              <span
+                class="bg-secondary text-on-primary font-label text-[10px] px-2.5 py-1 rounded-sm uppercase tracking-wider"
+                data-en="Fan Favourite"
+                data-ar="الأكثر حباً"
+                >الأكثر حباً</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Caramel Macchiato"
+                data-ar="كراميل ماكياتو"
+              >
+                كراميل ماكياتو
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 110</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Vanilla syrup, steamed milk, espresso shots, and caramel drizzle on top."
+              data-ar="شراب الفانيليا، لبن مبخر، شوت إسبريسو، وصوص كراميل في الأعلى."
+            >
+              شراب الفانيليا، لبن مبخر، إسبريسو، وصوص كراميل.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Caramel Macchiato"
+                data-name-ar="كراميل ماكياتو"
+                data-price="110"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Vanilla Latte -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="milk"
+          data-aos="fade-up"
+          data-aos-delay="50"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Easy Homemade Vanilla Latte Recipe.jpg"
+              alt="Vanilla Latte"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Vanilla Latte"
+                data-ar="فانيليا لاتيه"
+              >
+                فانيليا لاتيه
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 105</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Classic latte enhanced with house-made vanilla syrup."
+              data-ar="لاتيه كلاسيك مع شراب الفانيليا الطبيعي."
+            >
+              لاتيه كلاسيك مع شراب الفانيليا الطبيعي.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Vanilla Latte"
+                data-name-ar="فانيليا لاتيه"
+                data-price="105"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Hazelnut Latte -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="milk"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Hazelnut Latte ☕🌰💕.jpg"
+              alt="Hazelnut Latte"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Hazelnut Latte"
+                data-ar="هازلنت لاتيه"
+              >
+                هازلنت لاتيه
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 105</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Rich hazelnut syrup blended with espresso and silky steamed milk."
+              data-ar="شراب البندق الغني مع الإسبريسو واللبن الحريري."
+            >
+              شراب البندق الغني مع الإسبريسو واللبن الحريري.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Hazelnut Latte"
+                data-name-ar="هازلنت لاتيه"
+                data-price="105"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Mocha -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="milk"
+          data-aos="fade-up"
+          data-aos-delay="0"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Caffe Mocha Magic For Chocolate Coffee Lovers - Happy Baking Days.jpg"
+              alt="Mocha"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Mocha"
+                data-ar="موكا"
+              >
+                موكا
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 110</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Espresso with Belgian chocolate sauce and steamed milk — a coffee lover's dessert."
+              data-ar="إسبريسو مع صوص الشوكولاتة البلجيكية واللبن — حلوى عاشق القهوة."
+            >
+              إسبريسو مع صوص الشوكولاتة البلجيكية واللبن.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Mocha"
+                data-name-ar="موكا"
+                data-price="110"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Spanish Latte -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="milk"
+          data-aos="fade-up"
+          data-aos-delay="50"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Spanish Latte.jpg"
+              alt="Spanish Latte"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute top-3 start-3">
+              <span
+                class="bg-background/90 backdrop-blur text-primary-container font-label text-[10px] px-2.5 py-1 rounded-sm uppercase tracking-wider"
+                data-en="Popular"
+                data-ar="شائع جداً"
+                >شائع جداً</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Spanish Latte"
+                data-ar="سبانش لاتيه"
+              >
+                سبانش لاتيه
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 110</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Espresso with condensed milk and steamed milk — sweet, creamy, indulgent."
+              data-ar="إسبريسو مع اللبن المكثف واللبن المبخر — حلو وكريمي وممتع."
+            >
+              إسبريسو مع اللبن المكثف واللبن المبخر.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Spanish Latte"
+                data-name-ar="سبانش لاتيه"
+                data-price="110"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pistachio Latte -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="milk"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Pistachio Matcha Latte -.jpg"
+              alt="Pistachio Latte"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute top-3 start-3">
+              <span
+                class="bg-secondary text-on-primary font-label text-[10px] px-2.5 py-1 rounded-sm uppercase tracking-wider"
+                data-en="Trending"
+                data-ar="الأكثر ترنداً"
+                >الأكثر ترنداً</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Pistachio Latte"
+                data-ar="فستق لاتيه"
+              >
+                فستق لاتيه
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 125</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Roasted pistachio butter syrup with espresso and oat milk. A true sensation."
+              data-ar="شراب زبدة الفستق المحمص مع الإسبريسو وحليب الشوفان. إحساس حقيقي."
+            >
+              شراب الفستق المحمص مع الإسبريسو وحليب الشوفان.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Pistachio Latte"
+                data-name-ar="فستق لاتيه"
+                data-price="125"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Coconut Latte -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="milk"
+          data-aos="fade-up"
+          data-aos-delay="0"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Coconut Latte Recipe.jpg"
+              alt="Coconut Latte"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Coconut Latte"
+                data-ar="جوز الهند لاتيه"
+              >
+                جوز الهند لاتيه
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 110</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Espresso with coconut milk and a hint of coconut syrup — tropical and smooth."
+              data-ar="إسبريسو مع حليب جوز الهند وشراب جوز الهند — استوائي وناعم."
+            >
+              إسبريسو مع حليب جوز الهند — استوائي وناعم.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Coconut Latte"
+                data-name-ar="جوز الهند لاتيه"
+                data-price="110"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ─── SECTION: مثلجة ───────────────────────────────── -->
+        <div
+          class="col-span-full section-divider visible items-center gap-4"
+          data-section="iced"
+        >
+          <div class="h-px flex-1 bg-outline-variant/30"></div>
+          <span
+            class="font-label text-xs text-secondary uppercase tracking-widest whitespace-nowrap"
+            data-en="Iced Coffee"
+            data-ar="مشروبات مثلجة"
+            >مشروبات مثلجة</span
+          >
+          <div class="h-px flex-1 bg-outline-variant/30"></div>
+        </div>
+
+        <!-- Iced Latte -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="iced"
+          data-aos="fade-up"
+          data-aos-delay="0"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Nespresso Iced Vanilla Oat Milk Latte - Tea in January.jpg"
+              alt="Iced Latte"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Iced Latte"
+                data-ar="آيسد لاتيه"
+              >
+                آيسد لاتيه
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 100</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Chilled espresso poured over ice with cold fresh milk."
+              data-ar="إسبريسو مبرد مع الثلج واللبن الطازج البارد."
+            >
+              إسبريسو مبرد مع الثلج واللبن الطازج البارد.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Iced Latte"
+                data-name-ar="آيسد لاتيه"
+                data-price="100"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Iced Americano -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="iced"
+          data-aos="fade-up"
+          data-aos-delay="50"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Iced Americano.jpg"
+              alt="Iced Americano"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Iced Americano"
+                data-ar="آيسد أمريكانو"
+              >
+                آيسد أمريكانو
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 80</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Espresso over ice with cold water — refreshing and bold."
+              data-ar="إسبريسو على الثلج مع ماء بارد — منعش وجريء."
+            >
+              إسبريسو على الثلج مع ماء بارد — منعش وجريء.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Iced Americano"
+                data-name-ar="آيسد أمريكانو"
+                data-price="80"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Cold Brew -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="iced"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Spiced Vanilla Cold Brew Concentrate.jpg"
+              alt="Cold Brew"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute top-3 start-3">
+              <span
+                class="bg-background/90 backdrop-blur text-primary-container font-label text-[10px] px-2.5 py-1 rounded-sm uppercase tracking-wider"
+                data-en="12h Brew"
+                data-ar="تخمير ١٢ ساعة"
+                >تخمير ١٢ ساعة</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Cold Brew"
+                data-ar="كولد برو"
+              >
+                كولد برو
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 115</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Steeped 12 hours in cold water — silky, low-acidity, chocolate notes."
+              data-ar="مُخمَّر ١٢ ساعة في الماء البارد — حريري، قليل الحموضة، بنكهة الشوكولاتة."
+            >
+              مُخمَّر ١٢ ساعة في الماء البارد — حريري وقليل الحموضة.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Cold Brew"
+                data-name-ar="كولد برو"
+                data-price="115"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Iced Caramel Macchiato -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="iced"
+          data-aos="fade-up"
+          data-aos-delay="0"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Indulgent Iced Caramel Macchiato_ Make Starbucks at Home.jpg"
+              alt="Iced Caramel Macchiato"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Iced Caramel Macchiato"
+                data-ar="آيسد كراميل ماكياتو"
+              >
+                آيسد كراميل ماكياتو
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 115</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Layered over ice with vanilla, cold milk, espresso and caramel on top."
+              data-ar="طبقات على الثلج: فانيليا، لبن بارد، إسبريسو، وكراميل في الأعلى."
+            >
+              طبقات على الثلج: فانيليا، لبن بارد، إسبريسو، وكراميل.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Iced Caramel Macchiato"
+                data-name-ar="آيسد كراميل ماكياتو"
+                data-price="115"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Iced Spanish Latte -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="iced"
+          data-aos="fade-up"
+          data-aos-delay="50"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Easy Iced Spanish Latte Recipe.jpg"
+              alt="Iced Spanish Latte"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute top-3 start-3">
+              <span
+                class="bg-secondary text-on-primary font-label text-[10px] px-2.5 py-1 rounded-sm uppercase tracking-wider"
+                data-en="Signature"
+                data-ar="مميز"
+                >مميز</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Iced Spanish Latte"
+                data-ar="آيسد سبانش لاتيه"
+              >
+                آيسد سبانش لاتيه
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 115</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Condensed milk over ice, espresso poured on top — rich, sweet, perfect."
+              data-ar="لبن مكثف على الثلج، إسبريسو يُسكب في الأعلى — غني وحلو ومثالي."
+            >
+              لبن مكثف على الثلج، إسبريسو يُسكب في الأعلى.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Iced Spanish Latte"
+                data-name-ar="آيسد سبانش لاتيه"
+                data-price="115"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Frappé -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="iced"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Café Frappé _ La Boisson Parfaite pour l'Été.jpg"
+              alt="Frappé"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Frappé"
+                data-ar="فرابيه"
+              >
+                فرابيه
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 125</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Blended iced coffee with milk and cream — thick, indulgent, customizable."
+              data-ar="قهوة مثلجة ممزوجة باللبن والكريمة — كثيف وممتع ومخصص حسب رغبتك."
+            >
+              قهوة مثلجة ممزوجة باللبن والكريمة — كثيف ومنعش.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Frappé"
+                data-name-ar="فرابيه"
+                data-price="125"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ─── SECTION: مشروبات مميزة ───────────────────────── -->
+        <div
+          class="col-span-full section-divider visible items-center gap-4"
+          data-section="specialty"
+        >
+          <div class="h-px flex-1 bg-outline-variant/30"></div>
+          <span
+            class="font-label text-xs text-secondary uppercase tracking-widest whitespace-nowrap"
+            data-en="Specialty Drinks"
+            data-ar="مشروبات مميزة"
+            >مشروبات مميزة</span
+          >
+          <div class="h-px flex-1 bg-outline-variant/30"></div>
+        </div>
+
+        <!-- Affogato -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="specialty"
+          data-aos="fade-up"
+          data-aos-delay="0"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Classic Italian Hot Espresso Affogato Recipe.jpg"
+              alt="Affogato"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute top-3 start-3">
+              <span
+                class="bg-primary-container text-on-primary font-label text-[10px] px-2.5 py-1 rounded-sm uppercase tracking-wider"
+                data-en="Must Try"
+                data-ar="جرّبه لازم"
+                >جرّبه لازم</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Affogato"
+                data-ar="أفوجاتو"
+              >
+                أفوجاتو
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 130</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Hot espresso poured over a scoop of vanilla ice cream — heaven in a glass."
+              data-ar="إسبريسو ساخن يُسكب على كرة آيس كريم فانيليا — الجنة في كوب."
+            >
+              إسبريسو ساخن يُسكب على كرة آيس كريم فانيليا.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Affogato"
+                data-name-ar="أفوجاتو"
+                data-price="130"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Nutella Coffee -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="specialty"
+          data-aos="fade-up"
+          data-aos-delay="50"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Nutella Latte Recipe - Petite Panini.jpg"
+              alt="Nutella Coffee"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute top-3 start-3">
+              <span
+                class="bg-secondary text-on-primary font-label text-[10px] px-2.5 py-1 rounded-sm uppercase tracking-wider"
+                data-en="Trending 🔥"
+                data-ar="تريند 🔥"
+                >تريند 🔥</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Nutella Coffee"
+                data-ar="نوتيلا كوفي"
+              >
+                نوتيلا كوفي
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 135</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Espresso blended with Nutella, steamed milk and whipped cream on top."
+              data-ar="إسبريسو مع النوتيلا واللبن المبخر وكريمة خفق في الأعلى."
+            >
+              إسبريسو مع النوتيلا واللبن المبخر وكريمة خفق.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Nutella Coffee"
+                data-name-ar="نوتيلا كوفي"
+                data-price="135"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Kinder Coffee -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="specialty"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Kinder Chocolate Frappucino.jpg"
+              alt="Kinder Coffee"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute top-3 start-3">
+              <span
+                class="bg-secondary text-on-primary font-label text-[10px] px-2.5 py-1 rounded-sm uppercase tracking-wider"
+                data-en="Trending 🔥"
+                data-ar="تريند 🔥"
+                >تريند 🔥</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Kinder Coffee"
+                data-ar="كيندر كوفي"
+              >
+                كيندر كوفي
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 135</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Inspired by Kinder chocolate — espresso with a milky-chocolate hazelnut sauce."
+              data-ar="مستوحى من كيندر — إسبريسو مع صوص الشوكولاتة والحليب والبندق."
+            >
+              مستوحى من كيندر — إسبريسو مع صوص الشوكولاتة والبندق.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Kinder Coffee"
+                data-name-ar="كيندر كوفي"
+                data-price="135"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Lavender Latte -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="specialty"
+          data-aos="fade-up"
+          data-aos-delay="0"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Lavender Honey Latte - A Sip of Calm _ Coffee Maister.jpg"
+              alt="Lavender Latte"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Lavender Latte"
+                data-ar="لافندر لاتيه"
+              >
+                لافندر لاتيه
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 125</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="House-made lavender syrup with espresso and oat milk — floral and calming."
+              data-ar="شراب اللافندر محلي الصنع مع الإسبريسو وحليب الشوفان — زهري ومهدئ."
+            >
+              شراب اللافندر محلي الصنع مع الإسبريسو وحليب الشوفان.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Lavender Latte"
+                data-name-ar="لافندر لاتيه"
+                data-price="125"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Bonbon -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="specialty"
+          data-aos="fade-up"
+          data-aos-delay="50"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Bonbon Coffee.jpg"
+              alt="Bonbon"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Bonbon Coffee"
+                data-ar="بونبون كوفي"
+              >
+                بونبون كوفي
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 105</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Espresso over sweetened condensed milk — a Vietnamese-inspired delight."
+              data-ar="إسبريسو فوق لبن مكثف محلى — مستوحى من الثقافة الفيتنامية."
+            >
+              إسبريسو فوق لبن مكثف محلى — شديد الحلاوة والعمق.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Bonbon Coffee"
+                data-name-ar="بونبون كوفي"
+                data-price="105"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Oreo Latte -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="specialty"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Oreo Mocha Madness Latte.jpg"
+              alt="Oreo Latte"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute top-3 start-3">
+              <span
+                class="bg-secondary text-on-primary font-label text-[10px] px-2.5 py-1 rounded-sm uppercase tracking-wider"
+                data-en="Trending 🔥"
+                data-ar="تريند 🔥"
+                >تريند 🔥</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Oreo Latte"
+                data-ar="أوريو لاتيه"
+              >
+                أوريو لاتيه
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 130</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Blended Oreo cookies with milk and espresso — cookies & coffee perfection."
+              data-ar="أوريو ممزوج مع اللبن والإسبريسو — كمال البسكويت والقهوة."
+            >
+              أوريو ممزوج مع اللبن والإسبريسو.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Oreo Latte"
+                data-name-ar="أوريو لاتيه"
+                data-price="130"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ─── SECTION: تقليدي ──────────────────────────────── -->
+        <div
+          class="col-span-full section-divider visible items-center gap-4"
+          data-section="traditional"
+        >
+          <div class="h-px flex-1 bg-outline-variant/30"></div>
+          <span
+            class="font-label text-xs text-secondary uppercase tracking-widest whitespace-nowrap"
+            data-en="Traditional Coffee"
+            data-ar="قهوة تقليدية"
+            >قهوة تقليدية</span
+          >
+          <div class="h-px flex-1 bg-outline-variant/30"></div>
+        </div>
+
+        <!-- Turkish Coffee -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="traditional"
+          data-aos="fade-up"
+          data-aos-delay="0"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Turkish Coffee.jpg"
+              alt="Turkish Coffee"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute top-3 start-3">
+              <span
+                class="bg-background/90 backdrop-blur text-primary-container font-label text-[10px] px-2.5 py-1 rounded-sm uppercase tracking-wider"
+                data-en="Egyptian Classic 🇪🇬"
+                data-ar="كلاسيك مصري 🇪🇬"
+                >كلاسيك مصري 🇪🇬</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Turkish Coffee"
+                data-ar="قهوة تركية"
+              >
+                قهوة تركية
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 55</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Finely ground coffee brewed in a cezve. Choose: سادة (plain) / مظبوط (medium) / زيادة (sweet)."
+              data-ar="قهوة مطحونة ناعماً مطبوخة في الكانكة. اختر: سادة / مظبوط / زيادة."
+            >
+              قهوة مطحونة ناعماً مطبوخة في الكانكة. سادة / مظبوط / زيادة.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Turkish Coffee"
+                data-name-ar="قهوة تركية"
+                data-price="55"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- French Press -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="traditional"
+          data-aos="fade-up"
+          data-aos-delay="50"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/Spiced Persimmon French Press with Star Anise.jpg"
+              alt="French Coffee"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="French Coffee"
+                data-ar="قهوة فرنساوي"
+              >
+                قهوة فرنساوي
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 95</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Full-immersion French Press — rich, bold, textured. Brewed to order."
+              data-ar="تحضير فرنشبريس بالغمر الكامل — غني وجريء ومميز. يُحضَّر عند الطلب."
+            >
+              تحضير فرنش بريس بالغمر الكامل — غني وجريء. يُحضَّر عند الطلب.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="French Coffee"
+                data-name-ar="قهوة فرنساوي"
+                data-price="95"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Nescafé -->
+        <article
+          class="menu-card group flex flex-col bg-surface-container-lowest rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_8px_30px_rgba(28,28,25,0.09)] ring-1 ring-transparent hover:ring-secondary/25"
+          data-category="traditional"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="relative h-52 overflow-hidden bg-surface-container-low">
+            <img
+              src="/assets/images/Photos/nothing beats a coffee in the morning.jpg"
+              alt="Nescafé"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex justify-between items-start mb-2 gap-2">
+              <h3
+                class="font-headline text-xl text-primary-container leading-tight"
+                data-en="Nescafé"
+                data-ar="نسكافيه"
+              >
+                نسكافيه
+              </h3>
+              <span class="font-label text-secondary text-sm mt-1 flex-shrink-0"
+                >ج.م 60</span
+              >
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant mb-4 line-clamp-2"
+              data-en="Classic Nescafé served hot or iced, with milk and sugar to your liking."
+              data-ar="نسكافيه كلاسيك ساخن أو بارد، مع لبن وسكر حسب رغبتك."
+            >
+              نسكافيه كلاسيك ساخن أو بارد، مع لبن وسكر حسب رغبتك.
+            </p>
+            <div
+              class="mt-auto pt-4 border-t border-outline-variant/20 flex justify-end"
+            >
+              <button
+                class="add-to-cart-btn text-secondary font-label text-xs uppercase tracking-widest flex items-center gap-1.5 hover:text-primary-container transition-colors"
+                data-name="Nescafé"
+                data-name-ar="نسكافيه"
+                data-price="60"
+              >
+                <span data-en="Add to Cart" data-ar="أضف للسلة">أضف للسلة</span>
+                <span class="material-symbols-outlined text-[16px]"
+                  >add_shopping_cart</span
+                >
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+      <!-- end grid -->
+
+      <!-- Empty state -->
+      <div id="no-results" class="hidden text-center py-24">
+        <span class="material-symbols-outlined text-5xl text-outline mb-4 block"
+          >search_off</span
+        >
+        <p
+          class="font-headline text-2xl text-primary-container"
+          data-en="No items in this category"
+          data-ar="لا توجد عناصر في هذه الفئة"
+        >
+          لا توجد عناصر في هذه الفئة
+        </p>
+      </div>
+    </main>
+
+    <!-- ══ FOOTER ═══════════════════════════════════════════════════════════ -->
+    <footer
+      class="bg-[#2C1810] text-[#F5ECD7] font-body text-sm py-20 px-8 md:px-12"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+        <div>
+          <div class="font-headline text-3xl text-[#735a36] mb-4">Café</div>
+          <p class="text-stone-400 mt-4">
+            <span
+              data-en="© 2025 Café. All rights reserved."
+              data-ar="© 2025 مقهي. جميع الحقوق محفوظة."
+              >© 2025 مقهي. جميع الحقوق محفوظة.</span
+            >
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <a
+            class="text-stone-400 hover:text-[#735a36] transition-all"
+            href="#"
+            data-en="Privacy Policy"
+            data-ar="سياسة الخصوصية"
+            >سياسة الخصوصية</a
+          >
+          <a
+            class="text-stone-400 hover:text-[#735a36] transition-all"
+            href="#"
+            data-en="Terms of Service"
+            data-ar="شروط الاستخدام"
+            >شروط الاستخدام</a
+          >
+        </div>
+        <div class="flex flex-col gap-3">
+          <p
+            class="font-label text-xs text-[#735a36] uppercase tracking-widest mb-1"
+            data-en="Find Us"
+            data-ar="موقعنا"
+          >
+            موقعنا
+          </p>
+          <p
+            class="text-stone-400"
+            data-en="Downtown Cairo"
+            data-ar="وسط البلد، القاهرة"
+          >
+            وسط البلد، القاهرة
+          </p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <p
+            class="font-label text-xs text-[#735a36] uppercase tracking-widest mb-1"
+            data-en="Follow Us"
+            data-ar="تابعنا"
+          >
+            تابعنا
+          </p>
+          <a class="text-stone-400 hover:text-[#735a36] transition-all" href="#"
+            >Instagram</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script>
+      /* ══ MENU FILTER ═══════════════════════════════════════════════════════ */
+      (function () {
+        var filterBtns = document.querySelectorAll("[data-filter]");
+        var cards = document.querySelectorAll(".menu-card");
+        var dividers = document.querySelectorAll(".section-divider");
+        var noResults = document.getElementById("no-results");
+
+        filterBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var filter = btn.dataset.filter;
+
+            // update active button
+            filterBtns.forEach(function (b) {
+              b.classList.remove("active");
+            });
+            btn.classList.add("active");
+
+            var visible = 0;
+
+            cards.forEach(function (card) {
+              var match = filter === "all" || card.dataset.category === filter;
+              card.style.display = match ? "" : "none";
+              if (match) visible++;
+            });
+
+            // show/hide section dividers
+            dividers.forEach(function (div) {
+              if (filter === "all") {
+                div.classList.add("visible");
+              } else {
+                var section = div.dataset.section;
+                div.classList.toggle("visible", section === filter);
+              }
+            });
+
+            if (noResults) noResults.classList.toggle("hidden", visible > 0);
+          });
+        });
+      })();
+
+      /* ══ CART ══════════════════════════════════════════════════════════════ */
+      (function () {
+        // ── EmailJS init ── replace with your real keys
+        if (typeof emailjs !== "undefined") {
+          emailjs.init("YOUR_PUBLIC_KEY"); // ← replace
+        }
+
+        var cart = [];
+
+        function getIsAr() {
+          return document.documentElement.lang === "ar";
+        }
+
+        function updateCartUI() {
+          var count = cart.reduce(function (s, i) {
+            return s + i.qty;
+          }, 0);
+          var countEl = document.getElementById("cart-count");
+          var itemsEl = document.getElementById("cart-items");
+          var emptyEl = document.getElementById("cart-empty");
+          var footerEl = document.getElementById("cart-footer");
+          var totalEl = document.getElementById("cart-total");
+          if (countEl) countEl.textContent = count;
+
+          if (cart.length === 0) {
+            if (emptyEl) emptyEl.style.display = "block";
+            if (footerEl) footerEl.classList.add("hidden");
+            if (itemsEl) {
+              itemsEl.innerHTML = "";
+              itemsEl.appendChild(emptyEl);
+            }
+            return;
+          }
+
+          if (emptyEl) emptyEl.style.display = "none";
+          if (footerEl) footerEl.classList.remove("hidden");
+
+          var total = 0;
+          itemsEl.innerHTML = "";
+          cart.forEach(function (item, idx) {
+            total += item.price * item.qty;
+            var div = document.createElement("div");
+            div.className = "cart-item";
+            div.innerHTML =
+              '<div class="cart-item-info">' +
+              '<div class="cart-item-name">' +
+              (getIsAr() ? item.nameAr : item.name) +
+              "</div>" +
+              '<div class="cart-item-price">ج.م ' +
+              item.price +
+              " × " +
+              item.qty +
+              "</div>" +
+              "</div>" +
+              '<button class="cart-item-remove material-symbols-outlined" onclick="removeFromCart(' +
+              idx +
+              ')">delete</button>';
+            itemsEl.appendChild(div);
+          });
+          if (totalEl) totalEl.textContent = "ج.م " + total;
+        }
+
+        window.removeFromCart = function (idx) {
+          cart.splice(idx, 1);
+          updateCartUI();
+        };
+
+        function addToCart(name, nameAr, price) {
+          var existing = cart.find(function (i) {
+            return i.name === name;
+          });
+          if (existing) {
+            existing.qty++;
+          } else {
+            cart.push({ name: name, nameAr: nameAr, price: price, qty: 1 });
+          }
+          updateCartUI();
+          openCart();
+        }
+
+        function openCart() {
+          var drawer = document.getElementById("cart-drawer");
+          var overlay = document.getElementById("cart-overlay");
+          if (drawer) drawer.classList.add("open");
+          if (overlay) overlay.classList.remove("hidden");
+          document.body.style.overflow = "hidden";
+        }
+        function closeCart() {
+          var drawer = document.getElementById("cart-drawer");
+          var overlay = document.getElementById("cart-overlay");
+          if (drawer) drawer.classList.remove("open");
+          if (overlay) overlay.classList.add("hidden");
+          document.body.style.overflow = "";
+        }
+
+        document.getElementById("cart-btn").addEventListener("click", openCart);
+        document
+          .getElementById("close-cart")
+          .addEventListener("click", closeCart);
+        document
+          .getElementById("cart-overlay")
+          .addEventListener("click", closeCart);
+
+        document.querySelectorAll(".add-to-cart-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            addToCart(
+              btn.dataset.name,
+              btn.dataset.nameAr,
+              parseInt(btn.dataset.price),
+            );
+          });
+        });
+
+        // Auto-add from home page featured card click
+        (function () {
+          var autoAdd = localStorage.getItem("bs_auto_add");
+          if (autoAdd) {
+            try {
+              var item = JSON.parse(autoAdd);
+              localStorage.removeItem("bs_auto_add");
+              setTimeout(function () {
+                addToCart(item.name, item.nameAr, parseInt(item.price));
+              }, 600);
+            } catch (e) {}
+          }
+        })();
+
+        // Place order
+        document
+          .getElementById("place-order-btn")
+          .addEventListener("click", function () {
+            var isAr = getIsAr();
+            var name = document.getElementById("order-name").value.trim();
+            var phone = document.getElementById("order-phone").value.trim();
+            var notes = document.getElementById("order-notes").value.trim();
+
+            if (!name || !phone) {
+              alert(
+                isAr
+                  ? "من فضلك أدخل اسمك ورقم هاتفك"
+                  : "Please enter your name and phone number.",
+              );
+              return;
+            }
+            if (cart.length === 0) return;
+
+            var lines = cart
+              .map(function (i) {
+                return (
+                  "• " +
+                  i.name +
+                  " (" +
+                  i.nameAr +
+                  ") × " +
+                  i.qty +
+                  " — ج.م " +
+                  i.price * i.qty
+                );
+              })
+              .join("\n");
+            var total = cart.reduce(function (s, i) {
+              return s + i.price * i.qty;
+            }, 0);
+
+            var params = {
+              to_email: "wahadmomo@gmail.com",
+              type: "Menu Order — طلب قائمة",
+              from_name: name,
+              phone: phone,
+              email: "N/A",
+              order_items: lines,
+              total: "ج.م " + total,
+              date: "N/A",
+              time: "N/A",
+              guests: "N/A",
+              notes: notes || "لا يوجد",
+              booking_time: new Date().toLocaleString("ar-EG"),
+            };
+
+            var btn = document.getElementById("place-order-btn");
+            btn.disabled = true;
+            btn.textContent = "⏳";
+
+            if (typeof emailjs === "undefined") {
+              // EmailJS not set up yet — show success anyway for testing
+              setTimeout(function () {
+                cart.length = 0;
+                updateCartUI();
+                closeCart();
+                if (typeof window.showSuccessToast === "function") {
+                  window.showSuccessToast(
+                    isAr
+                      ? "تم إرسال طلبك! سنتواصل معك قريباً ☕"
+                      : "Order sent! We'll contact you shortly ☕",
+                  );
+                }
+                btn.disabled = false;
+                btn.textContent = isAr ? "تأكيد الطلب" : "Place Order";
+              }, 800);
+              return;
+            }
+
+            emailjs
+              .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", params)
+              .then(function () {
+                cart.length = 0;
+                updateCartUI();
+                closeCart();
+                if (typeof window.showSuccessToast === "function") {
+                  window.showSuccessToast(
+                    isAr
+                      ? "تم إرسال طلبك! سنتواصل معك قريباً ☕"
+                      : "Order sent! We'll contact you shortly ☕",
+                  );
+                }
+              })
+              .catch(function (err) {
+                console.error(err);
+                alert(
+                  isAr
+                    ? "فشل الإرسال، حاول مرة أخرى"
+                    : "Send failed, please try again.",
+                );
+              })
+              .finally(function () {
+                btn.disabled = false;
+                btn.textContent = isAr ? "تأكيد الطلب" : "Place Order";
+              });
+          });
+
+        updateCartUI();
+      })();
+    </script>
+  </body>
+</html>

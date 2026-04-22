@@ -1,0 +1,828 @@
+<!doctype html>
+<html class="light" lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — Roast &amp; Ritual</title>
+    <meta
+      name="description"
+      content="Get in touch with Roast &amp; Ritual. Questions about roasting, wholesale, or events — we're here to listen."
+    />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <link rel="stylesheet" href="../../assets/css/shared.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#e5e2dd",
+              primary: "#090100",
+              "surface-container-high": "#ebe8e3",
+              "secondary-fixed": "#ffddb0",
+              surface: "#fcf9f4",
+              "surface-container-low": "#f6f3ee",
+              "secondary-container": "#fddaac",
+              "surface-container": "#f0ede9",
+              secondary: "#735a36",
+              "surface-variant": "#e5e2dd",
+              "on-primary": "#ffffff",
+              "primary-fixed-dim": "#e3bfb2",
+              "surface-dim": "#dcdad5",
+              "on-surface-variant": "#504440",
+              "surface-container-lowest": "#ffffff",
+              "primary-container": "#2c1810",
+              "on-surface": "#1c1c19",
+              background: "#fcf9f4",
+              "outline-variant": "#d3c3be",
+              outline: "#827470",
+              "on-secondary": "#ffffff",
+              "on-secondary-container": "#785e39",
+              "on-primary-container": "#9e7e73",
+              "on-background": "#1c1c19",
+              error: "#ba1a1a",
+            },
+            fontFamily: {
+              headline: ["Cormorant Garamond", "serif"],
+              body: ["Outfit", "sans-serif"],
+              label: ["DM Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+
+  <body class="bg-surface text-on-surface font-body antialiased">
+    <!-- ══ NAVBAR ══════════════════════════════════════════════════════════ -->
+    <header id="main-nav">
+      <div class="nav-inner">
+        <a href="../../index.html" class="nav-logo">Café</a>
+        <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+          <a href="../../index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+          <a href="../menu/index.html" data-en="Menu" data-ar="القائمة">Menu</a>
+          <a href="../story/index.html" data-en="Our Story" data-ar="قصتنا"
+            >Our Story</a
+          >
+          <a
+            href="../reservation/index.html"
+            data-en="Reservations"
+            data-ar="الحجوزات"
+            >Reservations</a
+          >
+          <a href="../contact/index.html" data-en="Contact" data-ar="تواصل معنا"
+            >Contact</a
+          >
+        </nav>
+        <div class="nav-controls">
+          <button id="lang-toggle" class="nav-btn" aria-label="Switch language">
+            ع
+          </button>
+          <button
+            id="theme-toggle"
+            class="nav-btn material-symbols-outlined"
+            data-theme-icon
+            aria-label="Toggle dark mode"
+          >
+            dark_mode
+          </button>
+          <a
+            href="../reservation/index.html"
+            class="nav-cta"
+            data-en="Book a Table"
+            data-ar="احجز طاولة"
+            >Book a Table</a
+          >
+          <button
+            id="hamburger"
+            class="nav-btn material-symbols-outlined"
+            aria-label="Open menu"
+          >
+            menu
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="mobile-overlay" aria-hidden="true"></div>
+
+    <div
+      id="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Navigation menu"
+    >
+      <div class="mobile-menu-header">
+        <a href="../../index.html" class="mobile-menu-logo">Café</a>
+        <button
+          id="mobile-menu-close"
+          class="material-symbols-outlined"
+          aria-label="Close menu"
+        >
+          close
+        </button>
+      </div>
+      <nav class="mobile-menu-links" aria-label="Mobile navigation">
+        <a
+          href="../../index.html"
+          class="mob-link"
+          data-en="Home"
+          data-ar="الرئيسية"
+          >Home</a
+        >
+        <a
+          href="../menu/index.html"
+          class="mob-link"
+          data-en="Menu"
+          data-ar="القائمة"
+          >Menu</a
+        >
+        <a
+          href="../story/index.html"
+          class="mob-link"
+          data-en="Our Story"
+          data-ar="قصتنا"
+          >Our Story</a
+        >
+        <a
+          href="../reservation/index.html"
+          class="mob-link"
+          data-en="Reservations"
+          data-ar="الحجوزات"
+          >Reservations</a
+        >
+        <a
+          href="../contact/index.html"
+          class="mob-link"
+          data-en="Contact"
+          data-ar="تواصل معنا"
+          >Contact</a
+        >
+      </nav>
+      <div class="mobile-menu-footer">
+        <a
+          href="../reservation/index.html"
+          class="mob-cta"
+          data-en="Book a Table"
+          data-ar="احجز طاولة"
+          >Book a Table</a
+        >
+      </div>
+    </div>
+
+    <!-- ══ MAIN ════════════════════════════════════════════════════════════ -->
+    <main class="pt-32 pb-0">
+      <!-- ── Contact Section ── -->
+      <section class="py-16 md:py-24 px-6 md:px-12 lg:px-24">
+        <div
+          class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-start"
+        >
+          <!-- Left: Header + Form -->
+          <div class="w-full md:w-7/12 z-10">
+            <div class="mb-12" data-aos="fade-up">
+              <span
+                class="font-label text-secondary text-xs tracking-widest uppercase mb-4 block"
+                data-en="Get in Touch"
+                data-ar="تواصل معنا"
+                >Get in Touch</span
+              >
+              <h1
+                class="font-headline text-5xl md:text-7xl font-bold leading-tight tracking-tight text-primary-container mb-6"
+              >
+                <span class="block" data-en="Let's Talk" data-ar="دعنا نتحدث"
+                  >Let's Talk</span
+                >
+                <span class="block" data-en="Coffee." data-ar="عن القهوة."
+                  >Coffee.</span
+                >
+              </h1>
+              <p
+                class="font-body text-on-surface-variant text-lg max-w-md leading-relaxed"
+              >
+                Whether you have a question about our roasting process,
+                wholesale inquiries, or just want to say hello — we're here to
+                listen.
+              </p>
+            </div>
+
+            <!-- Contact Form -->
+            <form
+              id="contact-form"
+              class="space-y-6 bg-surface-container-lowest p-8 md:p-10 rounded-xl border border-outline-variant/15 shadow-[0_8px_40px_-12px_rgba(28,28,25,0.06)]"
+              onsubmit="return false;"
+              data-aos="fade-up"
+              data-aos-delay="80"
+            >
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label
+                    class="font-label text-xs text-on-surface-variant uppercase tracking-wider"
+                    for="c-firstname"
+                    data-en="Your Name"
+                    data-ar="اسمك"
+                    >Your Name</label
+                  >
+                  <input
+                    id="c-firstname"
+                    name="firstName"
+                    type="text"
+                    class="w-full bg-surface-container-low border-none rounded-sm px-4 py-3 font-body text-on-surface focus:ring-1 focus:ring-secondary transition-colors"
+                    placeholder="Jane"
+                    data-en="Jane"
+                    data-ar="محمد"
+                  />
+                </div>
+                <div class="space-y-2">
+                  <label
+                    class="font-label text-xs text-on-surface-variant uppercase tracking-wider"
+                    for="c-lastname"
+                    data-en="Last Name"
+                    data-ar="اسم العائلة"
+                    >Last Name</label
+                  >
+                  <input
+                    id="c-lastname"
+                    name="lastName"
+                    type="text"
+                    class="w-full bg-surface-container-low border-none rounded-sm px-4 py-3 font-body text-on-surface focus:ring-1 focus:ring-secondary transition-colors"
+                    placeholder="Doe"
+                    data-en="Doe"
+                    data-ar="أحمد"
+                  />
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <label
+                  class="font-label text-xs text-on-surface-variant uppercase tracking-wider"
+                  for="c-email"
+                  data-en="Email"
+                  data-ar="البريد الإلكتروني"
+                  >Email</label
+                >
+                <input
+                  id="c-email"
+                  name="email"
+                  type="email"
+                  class="w-full bg-surface-container-low border-none rounded-sm px-4 py-3 font-body text-on-surface focus:ring-1 focus:ring-secondary transition-colors"
+                  placeholder="jane@example.com"
+                  data-en="jane@example.com"
+                  data-ar="example@email.com"
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label
+                  class="font-label text-xs text-on-surface-variant uppercase tracking-wider"
+                  for="c-inquiry"
+                  data-en="Inquiry Type"
+                  data-ar="نوع الاستفسار"
+                  >Inquiry Type</label
+                >
+                <div class="relative">
+                  <select
+                    id="c-inquiry"
+                    name="inquiryType"
+                    class="w-full bg-surface-container-low border-none rounded-sm px-4 py-3 font-body text-on-surface focus:ring-1 focus:ring-secondary transition-colors appearance-none"
+                  >
+                    <option data-en="General Inquiry" data-ar="استفسار عام">
+                      General Inquiry
+                    </option>
+                    <option data-en="Wholesale" data-ar="الجملة">
+                      Wholesale
+                    </option>
+                    <option
+                      data-en="Events &amp; Catering"
+                      data-ar="الفعاليات والضيافة"
+                    >
+                      Events &amp; Catering
+                    </option>
+                    <option data-en="Feedback" data-ar="ملاحظات">
+                      Feedback
+                    </option>
+                  </select>
+                  <span
+                    class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-lg"
+                    >expand_more</span
+                  >
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <label
+                  class="font-label text-xs text-on-surface-variant uppercase tracking-wider"
+                  for="c-message"
+                  data-en="Message"
+                  data-ar="رسالتك"
+                  >Message</label
+                >
+                <textarea
+                  id="c-message"
+                  name="message"
+                  rows="5"
+                  class="w-full bg-surface-container-low border-none rounded-sm px-4 py-3 font-body text-on-surface focus:ring-1 focus:ring-secondary transition-colors resize-none"
+                  placeholder="Write your message here..."
+                  data-en="Write your message here..."
+                  data-ar="اكتب رسالتك هنا..."
+                ></textarea>
+              </div>
+
+              <button
+                id="contact-send-btn"
+                type="button"
+                class="w-full bg-primary-container text-on-primary font-body font-medium px-8 py-4 rounded-md hover:bg-primary transition-colors duration-300"
+                data-en="Send Message"
+                data-ar="أرسل رسالة"
+              >
+                Send Message
+              </button>
+            </form>
+
+            <!-- Success message -->
+            <div
+              id="contact-success"
+              class="hidden mt-8 bg-surface-container-low rounded-xl p-10 text-center border border-outline-variant/10"
+            >
+              <span
+                class="material-symbols-outlined text-secondary"
+                style="
+                  font-size: 3.5rem;
+                  font-variation-settings: &quot;FILL&quot; 1;
+                  display: block;
+                  margin-bottom: 1rem;
+                "
+                >mark_email_read</span
+              >
+              <h3
+                class="font-headline text-2xl text-primary-container mb-3"
+                data-en="Message sent successfully!"
+                data-ar="تم إرسال رسالتك بنجاح!"
+              >
+                Message sent successfully!
+              </h3>
+              <p
+                class="font-body text-on-surface-variant text-sm leading-relaxed"
+              >
+                We usually respond within one business day. Keep an eye on your
+                inbox.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: Image + Visit Us Card -->
+          <div
+            class="w-full md:w-5/12 flex flex-col gap-8 mt-6 md:mt-0"
+            data-aos="fade-left"
+            data-aos-delay="100"
+          >
+            <!-- Atmospheric image -->
+            <div
+              class="w-full aspect-[4/5] bg-surface-container-low rounded-xl overflow-hidden relative hidden md:block"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBDbJ-tMrnSFClfcKsaKBxnLTFxl90ju-y_S2b7-86MZO0rzB7EG_GtwQyG2cCySOBOdFc5h89C6IYWsOff_qcpcZimukJMz_167yPFyJsicJsaOhTSj0bXUmn7Rgwer23y11gPUTU_c-OEwFAAgehVmD4YLc7PBKOXzOsuEbWf2Ci77OC55R1IH5KGRjaGL4Vup4G_pyN_A5RgarIFpWso_zVTWpe1Q5Dc9oSqzaMQKJhM1mdEjO9GSrr07Rg0k7oiBwHcsfurME"
+                alt="Artisan pour over coffee brewing process"
+                class="w-full h-full object-cover"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-primary-container/70 via-transparent to-transparent"
+              ></div>
+            </div>
+
+            <!-- ══ VISIT US CARD (replaces map) ══ -->
+            <div
+              class="bg-surface-container-low rounded-xl p-8 flex flex-col gap-5 relative overflow-hidden"
+            >
+              <!-- Decorative glow -->
+              <div
+                class="absolute -right-16 -top-16 w-48 h-48 bg-surface-container rounded-full blur-3xl opacity-60 pointer-events-none"
+              ></div>
+
+              <!-- Title -->
+              <div class="flex items-center gap-3 relative z-10">
+                <div
+                  class="w-11 h-11 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0"
+                >
+                  <span
+                    class="material-symbols-outlined text-2xl text-on-secondary-container"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >storefront</span
+                  >
+                </div>
+                <h3
+                  class="font-headline text-2xl text-primary-container"
+                  data-en="Visit Us"
+                  data-ar="زورونا"
+                >
+                  Visit Us
+                </h3>
+              </div>
+
+              <hr class="brand-rule relative z-10" />
+
+              <!-- Address -->
+              <div class="relative z-10">
+                <p
+                  class="font-label text-xs uppercase tracking-widest text-secondary mb-2"
+                  data-en="Address"
+                  data-ar="العنوان"
+                >
+                  Address
+                </p>
+                <p class="font-body text-on-surface leading-relaxed">
+                  <span
+                    data-en="12 Nile Street, Downtown Cairo"
+                    data-ar="١٢ شارع النيل، وسط البلد، القاهرة"
+                    >12 Nile Street, Downtown Cairo</span
+                  >
+                </p>
+              </div>
+
+              <!-- Hours -->
+              <div class="relative z-10">
+                <p
+                  class="font-label text-xs uppercase tracking-widest text-secondary mb-3"
+                  data-en="Opening Hours"
+                  data-ar="مواعيد العمل"
+                >
+                  Opening Hours
+                </p>
+                <table class="w-full text-sm font-body">
+                  <tbody>
+                    <tr>
+                      <td
+                        class="text-on-surface-variant pr-4 py-1"
+                        data-en="Mon – Fri"
+                        data-ar="الاثنين – الجمعة"
+                      >
+                        Mon – Fri
+                      </td>
+                      <td class="text-on-surface text-right py-1">
+                        8:00 AM – 10:00 PM
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        class="text-on-surface-variant pr-4 py-1"
+                        data-en="Sat – Sun"
+                        data-ar="السبت – الأحد"
+                      >
+                        Sat – Sun
+                      </td>
+                      <td class="text-on-surface text-right py-1">
+                        9:00 AM – 11:00 PM
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <hr class="brand-rule relative z-10" />
+
+              <!-- Contact info -->
+              <div class="relative z-10 space-y-3">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-secondary"
+                    >mail</span
+                  >
+                  <p class="font-body text-on-surface text-sm">
+                    hello@brewandsoul.com
+                  </p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-outlined text-secondary"
+                    >call</span
+                  >
+                  <p class="font-label text-sm text-on-surface-variant">
+                    +20 (10) 234-5678
+                  </p>
+                </div>
+              </div>
+
+              <!-- Social -->
+              <div class="relative z-10 pt-1">
+                <p
+                  class="font-label text-xs text-on-surface-variant uppercase tracking-wider mb-3"
+                  data-en="Follow us"
+                  data-ar="تابعنا"
+                >
+                  Follow us
+                </p>
+                <div class="flex gap-3">
+                  <a
+                    class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary-container hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm"
+                    href="#"
+                    aria-label="Instagram"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >photo_camera</span
+                    >
+                  </a>
+                  <a
+                    class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary-container hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm"
+                    href="#"
+                    aria-label="Twitter"
+                  >
+                    <span class="material-symbols-outlined text-sm">share</span>
+                  </a>
+                  <a
+                    class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary-container hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm"
+                    href="#"
+                    aria-label="YouTube"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >play_arrow</span
+                    >
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- end visit us card -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ── FAQ Accordion ── -->
+      <section class="py-24 bg-surface-container-low px-6 md:px-12">
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-16" data-aos="fade-up">
+            <h2
+              class="font-headline text-4xl text-primary-container mb-4"
+              data-en="Common Questions"
+              data-ar="أسئلة شائعة"
+            >
+              Common Questions
+            </h2>
+            <p
+              class="font-body text-on-surface-variant"
+              data-en="Details on our process, beans, and business."
+              data-ar="تفاصيل حول عمليتنا وحبوب البن وأعمالنا."
+            >
+              Details on our process, beans, and business.
+            </p>
+          </div>
+
+          <div class="space-y-4" data-aos="fade-up" data-aos-delay="50">
+            <!-- FAQ 1 -->
+            <div
+              class="bg-surface rounded-xl p-6 border border-outline-variant/15"
+              data-faq-item
+            >
+              <button
+                class="w-full flex justify-between items-center text-left group"
+                data-faq-trigger
+              >
+                <h3
+                  class="font-headline text-lg text-primary-container group-hover:text-secondary transition-colors"
+                >
+                  Do you offer wholesale accounts?
+                </h3>
+                <span
+                  class="material-symbols-outlined text-secondary flex-shrink-0 ml-4 transition-transform duration-300"
+                  data-faq-icon
+                  >expand_more</span
+                >
+              </button>
+              <div class="mt-4 pr-10" data-faq-content>
+                <p
+                  class="font-body text-on-surface-variant text-sm leading-relaxed"
+                >
+                  Yes, we partner with select cafés that share our commitment to
+                  quality. Our wholesale program includes barista training,
+                  equipment consultation, and regular calibration sessions.
+                  Select 'Wholesale' in the contact form above to start the
+                  conversation.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div
+              class="bg-surface rounded-xl p-6 border border-outline-variant/10 hover:border-outline-variant/30 transition-colors"
+              data-faq-item
+            >
+              <button
+                class="w-full flex justify-between items-center text-left group"
+                data-faq-trigger
+              >
+                <h3
+                  class="font-headline text-lg text-primary-container group-hover:text-secondary transition-colors"
+                >
+                  What are your roasting days?
+                </h3>
+                <span
+                  class="material-symbols-outlined text-on-surface-variant flex-shrink-0 ml-4 transition-transform duration-300 group-hover:text-secondary"
+                  data-faq-icon
+                  >expand_more</span
+                >
+              </button>
+              <div class="mt-4 pr-10" data-faq-content>
+                <p
+                  class="font-body text-on-surface-variant text-sm leading-relaxed"
+                >
+                  We roast Tuesday through Saturday, from 6AM to 2PM in our
+                  Downtown Cairo facility. Visits by appointment — reach out via
+                  the form above.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div
+              class="bg-surface rounded-xl p-6 border border-outline-variant/10 hover:border-outline-variant/30 transition-colors"
+              data-faq-item
+            >
+              <button
+                class="w-full flex justify-between items-center text-left group"
+                data-faq-trigger
+              >
+                <h3
+                  class="font-headline text-lg text-primary-container group-hover:text-secondary transition-colors"
+                >
+                  Do you ship internationally?
+                </h3>
+                <span
+                  class="material-symbols-outlined text-on-surface-variant flex-shrink-0 ml-4 transition-transform duration-300 group-hover:text-secondary"
+                  data-faq-icon
+                  >expand_more</span
+                >
+              </button>
+              <div class="mt-4 pr-10" data-faq-content>
+                <p
+                  class="font-body text-on-surface-variant text-sm leading-relaxed"
+                >
+                  Currently we ship within Egypt and select MENA countries.
+                  International shipping is on our roadmap for Q3. Join our
+                  newsletter to be notified when it launches.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div
+              class="bg-surface rounded-xl p-6 border border-outline-variant/10 hover:border-outline-variant/30 transition-colors"
+              data-faq-item
+            >
+              <button
+                class="w-full flex justify-between items-center text-left group"
+                data-faq-trigger
+              >
+                <h3
+                  class="font-headline text-lg text-primary-container group-hover:text-secondary transition-colors"
+                >
+                  How should I store my beans at home?
+                </h3>
+                <span
+                  class="material-symbols-outlined text-on-surface-variant flex-shrink-0 ml-4 transition-transform duration-300 group-hover:text-secondary"
+                  data-faq-icon
+                  >expand_more</span
+                >
+              </button>
+              <div class="mt-4 pr-10" data-faq-content>
+                <p
+                  class="font-body text-on-surface-variant text-sm leading-relaxed"
+                >
+                  Store beans in an airtight container away from light, heat,
+                  and moisture. Room temperature is best — avoid the fridge, as
+                  humidity cycles degrade the oils quickly. Ceramic or opaque
+                  containers work best.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
+    <footer
+      class="bg-[#2C1810] text-[#F5ECD7] font-body text-sm py-20 px-8 md:px-12"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+        <div>
+          <div class="font-headline text-3xl text-[#735a36] mb-4">Café</div>
+          <p class="text-stone-400 mt-4">
+            <span
+              data-en="© 2025 Café. All rights reserved."
+              data-ar="© 2025 مقهي. جميع الحقوق محفوظة."
+              >© 2025 Café. All rights reserved.</span
+            >
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <a
+            class="text-stone-400 hover:text-[#735a36] transition-all"
+            href="#"
+            data-en="Privacy Policy"
+            data-ar="سياسة الخصوصية"
+            >Privacy Policy</a
+          >
+          <a
+            class="text-stone-400 hover:text-[#735a36] transition-all"
+            href="#"
+            data-en="Terms of Service"
+            data-ar="شروط الاستخدام"
+            >Terms of Service</a
+          >
+        </div>
+        <div class="flex flex-col gap-3">
+          <p
+            class="font-label text-xs text-[#735a36] uppercase tracking-widest mb-1"
+            data-en="Find Us"
+            data-ar="موقعنا"
+          >
+            Find Us
+          </p>
+          <p
+            class="text-stone-400"
+            data-en="Downtown Cairo"
+            data-ar="وسط البلد، القاهرة"
+          >
+            وسط البلد، القاهرة
+          </p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <p
+            class="font-label text-xs text-[#735a36] uppercase tracking-widest mb-1"
+            data-en="Follow Us"
+            data-ar="تابعنا"
+          >
+            Follow Us
+          </p>
+          <a
+            class="text-stone-400 hover:text-[#735a36] transition-all"
+            href="#"
+            data-en="Instagram"
+            data-ar="إنستغرام"
+            >Instagram</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/menu-filter.js"></script>
+
+    <script>
+      (function () {
+        "use strict";
+        var sendBtn = document.getElementById("contact-send-btn");
+        if (!sendBtn) return;
+
+        sendBtn.addEventListener("click", function () {
+          var isAr = document.documentElement.lang === "ar";
+          var name = (
+            (document.getElementById("c-firstname") || {}).value || ""
+          ).trim();
+          var msg = (
+            (document.getElementById("c-message") || {}).value || ""
+          ).trim();
+
+          if (!name || !msg) {
+            if (window.showSuccessToast) {
+              window.showSuccessToast(
+                isAr
+                  ? "يرجى ملء الاسم والرسالة"
+                  : "Please fill in your name and message.",
+              );
+            }
+            return;
+          }
+
+          var form = document.getElementById("contact-form");
+          var success = document.getElementById("contact-success");
+
+          // Show success in-place
+          if (form) form.classList.add("hidden");
+          if (success) success.classList.remove("hidden");
+
+          if (window.showSuccessToast) {
+            window.showSuccessToast(
+              isAr ? "تم إرسال رسالتك بنجاح!" : "Message sent successfully!",
+            );
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,727 @@
+<!doctype html>
+<html class="light" lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roast &amp; Ritual — Specialty Café</title>
+    <meta
+      name="description"
+      content="Roast &amp; Ritual is a specialty café in Downtown Cairo where every cup is a sacred encounter with origin and craft. Experience the sublime art of coffee."
+    />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <link rel="stylesheet" href="assets/css/shared.css" />
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-highest": "#e5e2dd",
+              "on-primary-fixed": "#2a170f",
+              primary: "#090100",
+              "surface-container-high": "#ebe8e3",
+              "secondary-fixed": "#ffddb0",
+              surface: "#fcf9f4",
+              "on-secondary-container": "#785e39",
+              tertiary: "#040300",
+              "inverse-on-surface": "#f3f0eb",
+              "secondary-fixed-dim": "#e2c195",
+              "primary-fixed": "#ffdbce",
+              "on-error": "#ffffff",
+              "on-secondary-fixed": "#281800",
+              "inverse-surface": "#31302d",
+              "surface-container-low": "#f6f3ee",
+              "on-primary-fixed-variant": "#5a4137",
+              "secondary-container": "#fddaac",
+              "surface-tint": "#74584e",
+              error: "#ba1a1a",
+              "surface-container": "#f0ede9",
+              secondary: "#735a36",
+              "surface-variant": "#e5e2dd",
+              "on-primary": "#ffffff",
+              "primary-fixed-dim": "#e3bfb2",
+              "on-secondary-fixed-variant": "#594320",
+              "surface-bright": "#fcf9f4",
+              "surface-dim": "#dcdad5",
+              "on-surface-variant": "#504440",
+              "error-container": "#ffdad6",
+              "tertiary-fixed": "#ebe2cd",
+              "on-primary-container": "#9e7e73",
+              "on-background": "#1c1c19",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-container": "#211d10",
+              "inverse-primary": "#e3bfb2",
+              "on-tertiary": "#ffffff",
+              "primary-container": "#2c1810",
+              "on-surface": "#1c1c19",
+              background: "#fcf9f4",
+              "outline-variant": "#d3c3be",
+              outline: "#827470",
+              "on-secondary": "#ffffff",
+            },
+            fontFamily: {
+              headline: ["Cormorant Garamond", "serif"],
+              body: ["Outfit", "sans-serif"],
+              label: ["DM Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+
+  <body class="bg-background text-on-surface font-body antialiased">
+    <!-- ══════════════  ROOT (index.html)  ══════════════ -->
+
+    <header id="main-nav">
+      <div class="nav-inner">
+        <!-- Logo -->
+        <a href="index.html" class="nav-logo">Café</a>
+
+        <!-- Desktop pill links -->
+        <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+          <a href="index.html" data-en="Home" data-ar="الرئيسية">Home</a>
+          <a href="pages/menu/index.html" data-en="Menu" data-ar="القائمة"
+            >Menu</a
+          >
+          <a href="pages/story/index.html" data-en="Our Story" data-ar="قصتنا"
+            >Our Story</a
+          >
+          <a
+            href="pages/reservation/index.html"
+            data-en="Reservations"
+            data-ar="الحجوزات"
+            >Reservations</a
+          >
+          <a
+            href="pages/contact/index.html"
+            data-en="Contact"
+            data-ar="تواصل معنا"
+            >Contact</a
+          >
+        </nav>
+
+        <!-- Controls -->
+        <div class="nav-controls">
+          <button id="lang-toggle" class="nav-btn" aria-label="Switch language">
+            ع
+          </button>
+          <button
+            id="theme-toggle"
+            class="nav-btn material-symbols-outlined"
+            data-theme-icon
+            aria-label="Toggle dark mode"
+          >
+            dark_mode
+          </button>
+          <a
+            href="pages/reservation/index.html"
+            class="nav-cta"
+            data-en="Book a Table"
+            data-ar="احجز طاولة"
+            >Book a Table</a
+          >
+          <button
+            id="hamburger"
+            class="nav-btn material-symbols-outlined"
+            aria-label="Open menu"
+          >
+            menu
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile sidebar overlay -->
+    <div id="mobile-overlay" aria-hidden="true"></div>
+
+    <!-- Mobile sidebar -->
+    <div
+      id="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Navigation menu"
+    >
+      <!-- Sidebar header -->
+      <div class="mobile-menu-header">
+        <a href="index.html" class="mobile-menu-logo">Café</a>
+        <button
+          id="mobile-menu-close"
+          class="material-symbols-outlined"
+          aria-label="Close menu"
+        >
+          close
+        </button>
+      </div>
+
+      <!-- Links -->
+      <nav class="mobile-menu-links" aria-label="Mobile navigation">
+        <a href="index.html" class="mob-link" data-en="Home" data-ar="الرئيسية"
+          >Home</a
+        >
+        <a
+          href="pages/menu/index.html"
+          class="mob-link"
+          data-en="Menu"
+          data-ar="القائمة"
+          >Menu</a
+        >
+        <a
+          href="pages/story/index.html"
+          class="mob-link"
+          data-en="Our Story"
+          data-ar="قصتنا"
+          >Our Story</a
+        >
+        <a
+          href="pages/reservation/index.html"
+          class="mob-link"
+          data-en="Reservations"
+          data-ar="الحجوزات"
+          >Reservations</a
+        >
+        <a
+          href="pages/contact/index.html"
+          class="mob-link"
+          data-en="Contact"
+          data-ar="تواصل معنا"
+          >Contact</a
+        >
+      </nav>
+
+      <!-- CTA at bottom -->
+      <div class="mobile-menu-footer">
+        <a
+          href="pages/reservation/index.html"
+          class="mob-cta"
+          data-en="Book a Table"
+          data-ar="احجز طاولة"
+          >Book a Table</a
+        >
+      </div>
+    </div>
+
+    <!-- ══ HERO ════════════════════════════════════════════════════════════ -->
+    <section
+      class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden"
+    >
+      <!-- Split background -->
+      <div class="absolute inset-0 z-0 flex">
+        <div
+          class="w-1/2 h-full bg-gradient-to-br from-primary to-primary-container"
+        ></div>
+        <div class="w-1/2 h-full bg-surface-container-low"></div>
+      </div>
+
+      <div
+        class="container mx-auto px-6 relative z-20 flex flex-col md:flex-row items-center justify-between gap-12"
+      >
+        <!-- Left: Text -->
+        <div
+          class="w-full md:w-5/12 text-on-primary pl-0 md:pl-8"
+          data-aos="fade-right"
+        >
+          <h1
+            class="font-headline text-5xl md:text-7xl font-light tracking-wider leading-tight mb-6"
+          >
+            <span class="block" data-en="Your coffee" data-ar="قهوتك"
+              >Your coffee</span
+            >
+            <span
+              class="block"
+              data-en="a moment you deserve"
+              data-ar="لحظة تستاهلها "
+              >a moment you deserve</span
+            >
+          </h1>
+          <p
+            class="font-body text-lg text-surface-variant/80 max-w-md mb-4 font-light leading-relaxed"
+            data-en="Where every cup is a profound meditation on flavor and origin."
+            data-ar="حيث كل كوب هو تأمل عميق في النكهة والأصل."
+          >
+            Where every cup is a profound meditation on flavor and origin.
+          </p>
+          <p
+            class="font-body text-base text-surface-variant/70 max-w-md mb-10 font-light leading-relaxed"
+            data-en="Step into a sanctuary of slow-brewed elegance. We honor the bean through a meticulous ritual of roasting and extraction, transforming the daily routine into an extraordinary sensory journey."
+            data-ar="ادخل إلى ملاذ من الأناقة المحضرة بتمهل. نحن نكرم حبة البن من خلال طقوس دقيقة من التحميص والاستخلاص، لنحول روتينك اليومي إلى رحلة حسية استثنائية."
+          >
+            Step into a sanctuary of slow-brewed elegance. We honor the bean
+            through a meticulous ritual of roasting and extraction, transforming
+            the daily routine into an extraordinary sensory journey.
+          </p>
+          <div class="flex flex-wrap gap-4 items-center">
+            <a
+              href="pages/menu/index.html"
+              class="bg-surface text-primary-container px-8 py-3 rounded-md hover:bg-surface-variant transition-colors duration-300 font-body tracking-wide font-medium"
+              data-en="Explore Menu"
+              data-ar="استكشف القائمة"
+              >Explore Menu</a
+            >
+            <a
+              href="pages/reservation/index.html"
+              class="text-on-primary px-8 py-3 rounded-md border border-outline-variant/30 hover:border-surface transition-colors duration-300 font-body tracking-wide"
+              data-en="Book a Table"
+              data-ar="احجز طاولة"
+              >Book a Table</a
+            >
+          </div>
+        </div>
+
+        <!-- Right: Decorative image -->
+        <div
+          class="w-full md:w-5/12 mt-12 md:mt-0 hidden md:block"
+          data-aos="fade-left"
+          data-aos-delay="150"
+        >
+          <div
+            class="aspect-[3/4] rounded-t-full overflow-hidden relative shadow-2xl shadow-primary/20"
+          >
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-CNw-jC9dp0mpOxJ2NINwhQ3sQlYCSoLROLDNTv5hbhVCTgJ5mdfgF64QW_799kwFLxgYoF5FghlZIZnp2RdNq2qmsJ2uR80lpUsqVy7Tm1nd7Z3A58IoPZp93HJoIfosv-TL9s-pBfx32OtpsOCDEn6srSFw_h9OHVEJHZ1ag5liKkiutVG09VzknuCYpWKzCJLoZ5hlCWfntkt860dHxUawofJA0WCJN-VWWSJUrjdApH_yjEKiD4b-S-F65HPBwL25qcHiz1c"
+              alt="Barista carefully pouring latte art into a ceramic cup"
+              class="w-full h-full object-cover mix-blend-luminosity opacity-80"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ CURATED SELECTIONS ══════════════════════════════════════════════ -->
+    <section class="py-32 bg-surface-container-low relative">
+      <div class="container mx-auto px-6">
+        <div
+          class="flex flex-col md:flex-row justify-between items-end mb-20"
+          data-aos="fade-up"
+        >
+          <div>
+            <h2
+              class="font-headline text-4xl text-primary-container tracking-wide mb-4"
+              data-en="Signature Rituals"
+              data-ar="طقوسنا المميزة"
+            >
+              Signature Rituals
+            </h2>
+            <p
+              class="font-body text-on-surface-variant max-w-md"
+              data-en="Crafted with reverence"
+              data-ar="محضرة بتبجيل"
+            >
+              Crafted with reverence
+            </p>
+          </div>
+          <a
+            href="pages/menu/index.html"
+            class="mt-6 md:mt-0 text-primary-container font-body text-sm font-medium hover:text-secondary transition-colors"
+            data-en="View Full Menu"
+            data-ar="عرض القائمة كاملة"
+            >View Full Menu</a
+          >
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <!-- Card 1 -->
+          <div
+            class="group cursor-pointer featured-drink-card transition-transform duration-300"
+            data-aos="fade-up"
+            data-aos-delay="0"
+            data-name="The Artisan Pour"
+            data-name-ar="الكوب الحرفي"
+            data-price="325"
+          >
+            <div
+              class="aspect-[4/5] bg-surface-container mb-6 overflow-hidden relative rounded-xl"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW2w2O-yz4oVUf3vmatEtJFmHCcOaYYsTM3RJzDeeueOeove1RyQdeWZjjI1CRlNOT0O0mUkkbShOEIaUTqJMGrKo84Otxjj1637DJkE5yHnKwPLOCGIz3OKxeXMj0ub5K4ruwoJ9GGx9cslwhaUPUx0mFXH36HZA_37QhSMPVcN6zlsAGO0oKLZDKBxfg5PbzrOS7lJUElVwT-CSOUuAcO0__6jKaQNfS5lLr4CId6qTpZYxhQKMyyqCIVwmBXvNyM2zVchWsUqo"
+                alt="The Artisan Pour"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div
+                class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-sm"
+              >
+                <span
+                  class="font-label text-xs text-primary-container"
+                  data-en="Single Origin"
+                  data-ar="أصل واحد"
+                  >Single Origin</span
+                >
+              </div>
+            </div>
+            <div class="flex justify-between items-start mb-3">
+              <h3
+                class="font-headline text-2xl text-primary-container"
+                data-en="The Artisan Pour"
+                data-ar="الكوب الحرفي"
+              >
+                The Artisan Pour
+              </h3>
+              <span class="font-label text-sm text-secondary">ج.م 325</span>
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant leading-relaxed"
+              data-en="A delicate, meditative pour-over revealing ethereal floral notes and a honeyed, lingering finish."
+              data-ar="قهوة مقطرة بأسلوب تأملي تكشف عن نغمات زهرية أثيرية ولمسة عسلية تدوم طويلاً."
+            >
+              A delicate, meditative pour-over revealing ethereal floral notes
+              and a honeyed, lingering finish.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div
+            class="group cursor-pointer featured-drink-card md:mt-16 transition-transform duration-300"
+            data-aos="fade-up"
+            data-aos-delay="100"
+            data-name="Midnight Tonic"
+            data-name-ar="التونيك الليلي"
+            data-price="350"
+          >
+            <div
+              class="aspect-[4/5] bg-surface-container mb-6 overflow-hidden relative rounded-xl"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ4Q7RCFnZ01ojJhCK5Mf_Nd4r2Q0CqYTRynmC1As12pwSADjqZ3RwbLO03EgEKfhp1W0NtETl7hGV3Wvy21ez1QmGN_Zp6LEClP8yQ0hzqlgjZ2GaCsgIZd_z2tYJ7MRScQQLvRRtZbv7SDaf7R5q35QvrN-o3rkDOkMUMXY15zrxD9u3y23d0ZRGRQqycobkBStjfVUjJjlb_tXbDfMJcKR7uCEsTJCA9uKoeaDC7tmn91LR9zdRujY9LP6hiL5sxgVZZUDtFas"
+                alt="Midnight Tonic"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div
+                class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-sm"
+              >
+                <span
+                  class="font-label text-xs text-primary-container"
+                  data-en="House Blend"
+                  data-ar="خلطة البيت"
+                  >House Blend</span
+                >
+              </div>
+            </div>
+            <div class="flex justify-between items-start mb-3">
+              <h3
+                class="font-headline text-2xl text-primary-container"
+                data-en="Midnight Tonic"
+                data-ar="التونيك الليلي"
+              >
+                Midnight Tonic
+              </h3>
+              <span class="font-label text-sm text-secondary">ج.م 350</span>
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant leading-relaxed"
+              data-en="A bold double ristretto dancing with artisanal tonic, finished with the essence of dehydrated blood orange."
+              data-ar="جرعة مزدوجة جريئة من الريستريتو تتراقص مع مياه التونيك الحرفية، بلمسة نهائية من جوهر البرتقال الدموي المجفف."
+            >
+              A bold double ristretto dancing with artisanal tonic, finished
+              with the essence of dehydrated blood orange.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div
+            class="group cursor-pointer featured-drink-card transition-transform duration-300"
+            data-aos="fade-up"
+            data-aos-delay="200"
+            data-name="Velvet Cortado"
+            data-name-ar="الكورتادو المخملي"
+            data-price="275"
+          >
+            <div
+              class="aspect-[4/5] bg-surface-container mb-6 overflow-hidden relative rounded-xl"
+            >
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA069nuCEbEbduI1_56NHfjyyd4BBiQm87TOL5_4Vg-QRxVnBEAKQVxxU3kumsXUBQgIriaoCWE4MNSEEc8ar1Lr0UWzcsmzlm5TyfEb9_qaT7-HBg7d2xqGCN0nLEJJhLTLgjVnB2xC46tN21itll06hfpsjabRa9dXTeElcgV0xHvzV-d62gdXwepusELcH8RnrfrFFEhcgfHLqf9P8NX7NSFeyvFL2vR3Dw-NpDBBLUjT52caeh0X1vTW3eoYQUsnKKfaPP4QOc"
+                alt="Velvet Cortado"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div
+                class="absolute top-4 right-4 bg-surface-container-lowest/80 backdrop-blur-md px-3 py-1 rounded-sm"
+              >
+                <span
+                  class="font-label text-xs text-primary-container"
+                  data-en="Reserve"
+                  data-ar="إصدار محدود"
+                  >Reserve</span
+                >
+              </div>
+            </div>
+            <div class="flex justify-between items-start mb-3">
+              <h3
+                class="font-headline text-2xl text-primary-container"
+                data-en="Velvet Cortado"
+                data-ar="الكورتادو المخملي"
+              >
+                Velvet Cortado
+              </h3>
+              <span class="font-label text-sm text-secondary">ج.م 275</span>
+            </div>
+            <p
+              class="font-body text-sm text-on-surface-variant leading-relaxed"
+              data-en="A harmonious union of intense espresso and silk-spun micro-foam. Pure, balanced, and profound."
+              data-ar="اتحاد متناغم بين الإسبريسو المكثف والرغوة الحريرية الدقيقة. نقي، متوازن، وعميق."
+            >
+              A harmonious union of intense espresso and silk-spun micro-foam.
+              Pure, balanced, and profound.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ TESTIMONIALS ════════════════════════════════════════════════════ -->
+    <section class="py-24 bg-surface relative">
+      <div class="container mx-auto px-6">
+        <h2
+          class="font-headline text-3xl text-primary-container text-center mb-16"
+          data-aos="fade-up"
+          data-en="Echoes of Our Guests"
+          data-ar="أصداء ضيوفنا"
+        >
+          Echoes of Our Guests
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+          <div
+            class="flex flex-col items-start"
+            data-aos="fade-up"
+            data-aos-delay="0"
+          >
+            <div class="flex text-secondary mb-6">
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+            </div>
+            <p
+              class="font-headline text-lg text-primary-container italic mb-6 leading-relaxed"
+              data-en='"A transcendent escape in the heart of the city. The precision of their pour-over is nothing short of poetry."'
+              data-ar='"ملاذ متسامٍ في قلب المدينة. دقة التحضير لديهم ليست أقل من كونها شعراً."'
+            >
+              "A transcendent escape in the heart of the city. The precision of
+              their pour-over is nothing short of poetry."
+            </p>
+            <div class="mt-auto">
+              <p class="font-label text-sm text-on-surface-variant">Elena R.</p>
+              <p
+                class="font-body text-xs text-outline mt-1"
+                data-en="Local Guide"
+                data-ar="مرشد محلي"
+              >
+                Local Guide
+              </p>
+            </div>
+          </div>
+          <div
+            class="flex flex-col items-start md:mt-12"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="flex text-secondary mb-6">
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+            </div>
+            <p
+              class="font-headline text-lg text-primary-container italic mb-6 leading-relaxed"
+              data-en='"The Midnight Tonic redefined my understanding of coffee. The space feels like a timeless literary salon."'
+              data-ar='"لقد أعاد مشروب ميدنايت تونيك تعريف فهمي للقهوة. المكان يبدو كصالون أدبي خالد."'
+            >
+              "The Midnight Tonic redefined my understanding of coffee. The
+              space feels like a timeless literary salon."
+            </p>
+            <div class="mt-auto">
+              <p class="font-label text-sm text-on-surface-variant">
+                Marcus T.
+              </p>
+              <p
+                class="font-body text-xs text-outline mt-1"
+                data-en="Design Director"
+                data-ar="مدير إبداعي"
+              >
+                Design Director
+              </p>
+            </div>
+          </div>
+          <div
+            class="flex flex-col items-start"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="flex text-secondary mb-6">
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >star</span
+              >
+            </div>
+            <p
+              class="font-headline text-lg text-primary-container italic mb-6 leading-relaxed"
+              data-en='"Finally, a sanctuary that truly honors the bean. The baristas possess a quiet, profound mastery."'
+              data-ar='"أخيراً، ملاذ يكرم حبة البن حق قدرها. يمتلك صانعو القهوة هنا براعة هادئة وعميقة."'
+            >
+              "Finally, a sanctuary that truly honors the bean. The baristas
+              possess a quiet, profound mastery."
+            </p>
+            <div class="mt-auto">
+              <p class="font-label text-sm text-on-surface-variant">Sarah J.</p>
+              <p
+                class="font-body text-xs text-outline mt-1"
+                data-en="Coffee Enthusiast"
+                data-ar="عاشقة القهوة"
+              >
+                Coffee Enthusiast
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
+    <footer
+      class="bg-[#2C1810] text-[#F5ECD7] font-body text-sm py-20 px-8 md:px-12"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+        <div>
+          <div class="font-headline text-3xl text-[#735a36] mb-4">Café</div>
+          <p class="text-stone-400 mt-4">
+            <span
+              data-en="© 2025 Café. All rights reserved."
+              data-ar="© 2025 مقهي. جميع الحقوق محفوظة."
+              >© 2025 Café. All rights reserved.</span
+            >
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <a
+            class="text-stone-400 hover:text-[#735a36] transition-all"
+            href="#"
+            data-en="Privacy Policy"
+            data-ar="سياسة الخصوصية"
+            >Privacy Policy</a
+          >
+          <a
+            class="text-stone-400 hover:text-[#735a36] transition-all"
+            href="#"
+            data-en="Terms of Service"
+            data-ar="شروط الاستخدام"
+            >Terms of Service</a
+          >
+        </div>
+        <div class="flex flex-col gap-3">
+          <p
+            class="font-label text-xs text-[#735a36] uppercase tracking-widest mb-1"
+            data-en="Find Us"
+            data-ar="موقعنا"
+          >
+            Find Us
+          </p>
+          <p
+            class="text-stone-400"
+            data-en="Downtown Cairo"
+            data-ar="وسط البلد، القاهرة"
+          >
+            وسط البلد، القاهرة
+          </p>
+        </div>
+        <div class="flex flex-col gap-3">
+          <p
+            class="font-label text-xs text-[#735a36] uppercase tracking-widest mb-1"
+            data-en="Follow Us"
+            data-ar="تابعنا"
+          >
+            Follow Us
+          </p>
+          <a
+            class="text-stone-400 hover:text-[#735a36] transition-all"
+            href="#"
+            data-en="Instagram"
+            data-ar="إنستغرام"
+            >Instagram</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
