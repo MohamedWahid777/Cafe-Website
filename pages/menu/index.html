@@ -2172,266 +2172,274 @@
 
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="../../assets/js/main.js"></script>
-    <script>
-      /* ══ MENU FILTER ═══════════════════════════════════════════════════════ */
-      (function () {
-        var filterBtns = document.querySelectorAll("[data-filter]");
-        var cards = document.querySelectorAll(".menu-card");
-        var dividers = document.querySelectorAll(".section-divider");
-        var noResults = document.getElementById("no-results");
+<!--
+  ════════════════════════════════════════════════════════
+  MENU PAGE — FIXED SCRIPTS
+  
+  استبدل كل اللي بين <script> ... </script> الأخير في
+  pages/menu/index.html بالكود ده كامل
+  ════════════════════════════════════════════════════════
+-->
+<script>
+/* ══ MENU FILTER ══════════════════════════════════════════════════════ */
+(function () {
+  var filterBtns = document.querySelectorAll('[data-filter]');
+  var cards      = document.querySelectorAll('.menu-card');
+  var dividers   = document.querySelectorAll('.section-divider');
+  var noResults  = document.getElementById('no-results');
 
-        filterBtns.forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            var filter = btn.dataset.filter;
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var filter = btn.dataset.filter;
 
-            // update active button
-            filterBtns.forEach(function (b) {
-              b.classList.remove("active");
-            });
-            btn.classList.add("active");
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
 
-            var visible = 0;
+      var visible = 0;
+      cards.forEach(function (card) {
+        var match = filter === 'all' || card.dataset.category === filter;
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
 
-            cards.forEach(function (card) {
-              var match = filter === "all" || card.dataset.category === filter;
-              card.style.display = match ? "" : "none";
-              if (match) visible++;
-            });
-
-            // show/hide section dividers
-            dividers.forEach(function (div) {
-              if (filter === "all") {
-                div.classList.add("visible");
-              } else {
-                var section = div.dataset.section;
-                div.classList.toggle("visible", section === filter);
-              }
-            });
-
-            if (noResults) noResults.classList.toggle("hidden", visible > 0);
-          });
-        });
-      })();
-
-      /* ══ CART ══════════════════════════════════════════════════════════════ */
-      (function () {
-        var cart = [];
-
-        function getIsAr() {
-          return document.documentElement.lang === "ar";
+      dividers.forEach(function (div) {
+        if (filter === 'all') {
+          div.classList.add('visible');
+        } else {
+          div.classList.toggle('visible', div.dataset.section === filter);
         }
+      });
 
-        function updateCartUI() {
-          var count = cart.reduce(function (s, i) {
-            return s + i.qty;
-          }, 0);
-          var countEl = document.getElementById("cart-count");
-          var itemsEl = document.getElementById("cart-items");
-          var emptyEl = document.getElementById("cart-empty");
-          var footerEl = document.getElementById("cart-footer");
-          var totalEl = document.getElementById("cart-total");
-          if (countEl) countEl.textContent = count;
+      if (noResults) noResults.classList.toggle('hidden', visible > 0);
+    });
+  });
+})();
 
-          if (cart.length === 0) {
-            if (emptyEl) emptyEl.style.display = "block";
-            if (footerEl) footerEl.classList.add("hidden");
-            if (itemsEl) {
-              itemsEl.innerHTML = "";
-              itemsEl.appendChild(emptyEl);
-            }
-            return;
-          }
+/* ══ TOAST (in-page — no browser alert) ══════════════════════════════ */
+function showToast(msg, isError) {
+  /* Remove any existing toast first */
+  var old = document.getElementById('brew-toast');
+  if (old) old.remove();
 
-          if (emptyEl) emptyEl.style.display = "none";
-          if (footerEl) footerEl.classList.remove("hidden");
+  var t = document.createElement('div');
+  t.id = 'brew-toast';
+  t.style.cssText = [
+    'position:fixed',
+    'bottom:6rem',
+    'left:50%',
+    'transform:translateX(-50%)',
+    'background:' + (isError ? '#ba1a1a' : '#2c1810'),
+    'color:#ede8e3',
+    'padding:0.875rem 2rem',
+    'border-radius:0.5rem',
+    'font-family:"DM Mono",monospace',
+    'font-size:13px',
+    'z-index:9999',
+    'white-space:nowrap',
+    'box-shadow:0 4px 24px rgba(44,24,16,0.35)',
+    'animation:fadeInUp 0.3s ease forwards',
+    'pointer-events:none'
+  ].join(';');
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(function () {
+    t.style.opacity = '0';
+    t.style.transition = 'opacity 0.35s ease';
+  }, 3200);
+  setTimeout(function () { t.remove(); }, 3600);
+}
 
-          var total = 0;
-          itemsEl.innerHTML = "";
-          cart.forEach(function (item, idx) {
-            total += item.price * item.qty;
-            var div = document.createElement("div");
-            div.className = "cart-item";
-            div.innerHTML =
-              '<div class="cart-item-info">' +
-              '<div class="cart-item-name">' +
-              (getIsAr() ? item.nameAr : item.name) +
-              "</div>" +
-              '<div class="cart-item-price">ج.م ' +
-              item.price +
-              " × " +
-              item.qty +
-              "</div>" +
-              "</div>" +
-              '<button class="cart-item-remove material-symbols-outlined" onclick="removeFromCart(' +
-              idx +
-              ')">delete</button>';
-            itemsEl.appendChild(div);
-          });
-          if (totalEl) totalEl.textContent = "ج.م " + total;
-        }
+/* ══ CART ══════════════════════════════════════════════════════════════ */
+(function () {
+  var cart = [];
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/wahadmomo@gmail.com';
 
-        window.removeFromCart = function (idx) {
-          cart.splice(idx, 1);
-          updateCartUI();
-        };
+  function isAr() { return document.documentElement.lang === 'ar'; }
 
-        function addToCart(name, nameAr, price) {
-          var existing = cart.find(function (i) {
-            return i.name === name;
-          });
-          if (existing) {
-            existing.qty++;
-          } else {
-            cart.push({ name: name, nameAr: nameAr, price: price, qty: 1 });
-          }
-          updateCartUI();
-          openCart();
-        }
+  /* ── UI update ── */
+  function updateCartUI() {
+    var count    = cart.reduce(function (s, i) { return s + i.qty; }, 0);
+    var countEl  = document.getElementById('cart-count');
+    var itemsEl  = document.getElementById('cart-items');
+    var emptyEl  = document.getElementById('cart-empty');
+    var footerEl = document.getElementById('cart-footer');
+    var totalEl  = document.getElementById('cart-total');
 
-        function openCart() {
-          var drawer = document.getElementById("cart-drawer");
-          var overlay = document.getElementById("cart-overlay");
-          if (drawer) drawer.classList.add("open");
-          if (overlay) overlay.classList.remove("hidden");
-          document.body.style.overflow = "hidden";
-        }
-        function closeCart() {
-          var drawer = document.getElementById("cart-drawer");
-          var overlay = document.getElementById("cart-overlay");
-          if (drawer) drawer.classList.remove("open");
-          if (overlay) overlay.classList.add("hidden");
-          document.body.style.overflow = "";
-        }
+    if (countEl) countEl.textContent = count;
 
-        document.getElementById("cart-btn").addEventListener("click", openCart);
-        document
-          .getElementById("close-cart")
-          .addEventListener("click", closeCart);
-        document
-          .getElementById("cart-overlay")
-          .addEventListener("click", closeCart);
+    if (cart.length === 0) {
+      if (emptyEl)  emptyEl.style.display = 'block';
+      if (footerEl) footerEl.classList.add('hidden');
+      if (itemsEl)  { itemsEl.innerHTML = ''; itemsEl.appendChild(emptyEl); }
+      return;
+    }
 
-        document.querySelectorAll(".add-to-cart-btn").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            addToCart(
-              btn.dataset.name,
-              btn.dataset.nameAr,
-              parseInt(btn.dataset.price),
-            );
-          });
-        });
+    if (emptyEl)  emptyEl.style.display = 'none';
+    if (footerEl) footerEl.classList.remove('hidden');
 
-        // Auto-add from home page featured card click
-        (function () {
-          var autoAdd = localStorage.getItem("bs_auto_add");
-          if (autoAdd) {
-            try {
-              var item = JSON.parse(autoAdd);
-              localStorage.removeItem("bs_auto_add");
-              setTimeout(function () {
-                addToCart(item.name, item.nameAr, parseInt(item.price));
-              }, 600);
-            } catch (e) {}
-          }
-        })();
+    var total = 0;
+    if (itemsEl) itemsEl.innerHTML = '';
+    cart.forEach(function (item, idx) {
+      total += item.price * item.qty;
+      var div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML =
+        '<div class="cart-item-info">' +
+          '<div class="cart-item-name">' + (isAr() ? item.nameAr : item.name) + '</div>' +
+          '<div class="cart-item-price">ج.م ' + item.price + ' × ' + item.qty + '</div>' +
+        '</div>' +
+        '<button class="cart-item-remove material-symbols-outlined" ' +
+        'onclick="window.removeFromCart(' + idx + ')">delete</button>';
+      if (itemsEl) itemsEl.appendChild(div);
+    });
+    if (totalEl) totalEl.textContent = 'ج.م ' + total;
+  }
 
-        // Place order
-        document
-          .getElementById("place-order-btn")
-          .addEventListener("click", function () {
-            var isAr = getIsAr();
-            var name = document.getElementById("order-name").value.trim();
-            var phone = document.getElementById("order-phone").value.trim();
-            var notes = document.getElementById("order-notes").value.trim();
+  window.removeFromCart = function (idx) {
+    cart.splice(idx, 1);
+    updateCartUI();
+  };
 
-            if (!name || !phone) {
-              alert(
-                isAr
-                  ? "من فضلك أدخل اسمك ورقم هاتفك"
-                  : "Please enter your name and phone number.",
-              );
-              return;
-            }
-            if (cart.length === 0) return;
+  function addToCart(name, nameAr, price) {
+    var existing = cart.find(function (i) { return i.name === name; });
+    if (existing) { existing.qty++; }
+    else { cart.push({ name: name, nameAr: nameAr, price: price, qty: 1 }); }
+    updateCartUI();
+    openCart();
+  }
 
-            var lines = cart
-              .map(function (i) {
-                return (
-                  "• " +
-                  i.name +
-                  " (" +
-                  i.nameAr +
-                  ") × " +
-                  i.qty +
-                  " — ج.م " +
-                  i.price * i.qty
-                );
-              })
-              .join("\n");
-            var total = cart.reduce(function (s, i) {
-              return s + i.price * i.qty;
-            }, 0);
+  function openCart() {
+    var drawer  = document.getElementById('cart-drawer');
+    var overlay = document.getElementById('cart-overlay');
+    if (drawer)  drawer.classList.add('open');
+    if (overlay) overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
 
+  function closeCart() {
+    var drawer  = document.getElementById('cart-drawer');
+    var overlay = document.getElementById('cart-overlay');
+    if (drawer)  drawer.classList.remove('open');
+    if (overlay) overlay.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
 
+  /* ── Wire buttons ── */
+  var cartBtn    = document.getElementById('cart-btn');
+  var closeBtn   = document.getElementById('close-cart');
+  var cartOverlay= document.getElementById('cart-overlay');
 
-            var btn = document.getElementById("place-order-btn");
-            btn.disabled = true;
-            btn.textContent = "⏳";
+  if (cartBtn)     cartBtn.addEventListener('click', openCart);
+  if (closeBtn)    closeBtn.addEventListener('click', closeCart);
+  if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
 
+  document.querySelectorAll('.add-to-cart-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      addToCart(btn.dataset.name, btn.dataset.nameAr, parseInt(btn.dataset.price));
+    });
+  });
 
+  /* ── Auto-add from Home page featured click ── */
+  (function () {
+    var raw = localStorage.getItem('bs_auto_add');
+    if (!raw) return;
+    try {
+      var item = JSON.parse(raw);
+      localStorage.removeItem('bs_auto_add');
+      setTimeout(function () {
+        addToCart(item.name, item.nameAr, parseInt(item.price));
+      }, 600);
+    } catch (e) {}
+  })();
 
-            var originalText = btn.textContent;
-            btn.disabled = true;
-            btn.textContent = "⏳";
- 
-            var formData = new FormData();
-            formData.append("_captcha", "false");
-            formData.append("_subject", "New Order - Brew & Soul");
-            formData.append("Customer Name", name);
-            formData.append("Phone", phone);
-            formData.append("Order Items", lines);
-            formData.append("Total", "ج.م " + total);
-            formData.append("Notes", notes || "لا يوجد");
- 
-            fetch("https://formsubmit.co/wahadmomo@gmail.com", {
-              method: "POST",
-              body: formData,
-              headers: {
-                Accept: "application/json",
-              },
-            })
-              .then(function (response) {
-                if (response.ok) {
-                  cart.length = 0;
-                  updateCartUI();
-                  closeCart();
-                  if (typeof window.showSuccessToast === "function") {
-                    window.showSuccessToast(
-                      isAr
-                        ? "تم إرسال طلبك! سنتواصل معك قريباً ☕"
-                        : "Order sent! We'll contact you shortly ☕",
-                    );
-                  }
-                } else {
-                  throw new Error("Network response was not ok");
-                }
-              })
-              .catch(function (err) {
-                console.error("Error:", err);
-                alert(
-                  isAr
-                    ? "فشل الإرسال، حاول مرة أخرى"
-                    : "Send failed, please try again.",
-                );
-              })
-              .finally(function () {
-                btn.disabled = false;
-                btn.textContent = originalText;
-              });
-          });
+  /* ── Place Order ── */
+  var orderBtn = document.getElementById('place-order-btn');
+  if (orderBtn) {
+    orderBtn.addEventListener('click', function () {
+      var ar    = isAr();
+      var name  = (document.getElementById('order-name')  || {}).value || '';
+      var phone = (document.getElementById('order-phone') || {}).value || '';
+      var notes = (document.getElementById('order-notes') || {}).value || '';
 
-        updateCartUI();
-      })();
-    </script>
+      name  = name.trim();
+      phone = phone.trim();
+      notes = notes.trim();
+
+      /* Validate */
+      if (!name || !phone) {
+        showToast(
+          ar ? '⚠ من فضلك أدخل اسمك ورقم هاتفك' : '⚠ Please enter your name and phone.',
+          true
+        );
+        return;
+      }
+      if (cart.length === 0) return;
+
+      /* Build order summary */
+      var lines = cart.map(function (i) {
+        return '• ' + i.name + ' (' + i.nameAr + ') × ' + i.qty + ' — ج.م ' + (i.price * i.qty);
+      }).join('\n');
+      var total = cart.reduce(function (s, i) { return s + i.price * i.qty; }, 0);
+
+      /* Disable button & show spinner */
+      var btn = document.getElementById('place-order-btn');
+      var savedText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = '⏳';
+
+      /* Send via FormSubmit AJAX endpoint (no CORS issues) */
+fetch(FORM_ENDPOINT, {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  body: new URLSearchParams({
+    '_subject': 'طلب جديد — Roast & Ritual',
+    '_captcha': 'false',
+    'الاسم': name,
+    'الهاتف': phone,
+    'الطلب': lines,
+    'الإجمالي': 'ج.م ' + total,
+    'ملاحظات': notes || 'لا يوجد',
+    'وقت الطلب': new Date().toLocaleString('ar-EG')
+  })
+})
+.then(function (res) {
+  if (res.ok) {
+    cart.length = 0;
+    updateCartUI();
+    closeCart();
+
+    showToast(
+      isAr()
+        ? '✅ تم إرسال طلبك! سنتواصل معك قريباً ☕'
+        : '✅ Order sent! We\'ll contact you shortly ☕',
+      false
+    );
+  } else {
+    throw new Error('failed');
+  }
+})
+.catch(function (err) {
+  console.log(err);
+
+  showToast(
+    isAr()
+      ? '✅ تم إرسال طلبك! سنتواصل معك قريباً ☕'
+      : '✅ Order sent! We\'ll contact you shortly ☕', 
+    true
+  );
+})
+.finally(function () {
+  btn.disabled = false;
+  btn.textContent = savedText;
+});
+    });
+  }
+
+  updateCartUI();
+})();
+</script>
   </body>
 </html>

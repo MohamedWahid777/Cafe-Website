@@ -251,9 +251,9 @@
                     name="firstName"
                     type="text"
                     class="w-full bg-surface-container-low border-none rounded-sm px-4 py-3 font-body text-on-surface focus:ring-1 focus:ring-secondary transition-colors"
-                    placeholder="Jane"
-                    data-en="Jane"
-                    data-ar="محمد"
+                    placeholder="Enter The Name"
+                    data-en="First name"
+                    data-ar="الاسم الاول"
                   />
                 </div>
                 <div class="space-y-2">
@@ -269,9 +269,9 @@
                     name="lastName"
                     type="text"
                     class="w-full bg-surface-container-low border-none rounded-sm px-4 py-3 font-body text-on-surface focus:ring-1 focus:ring-secondary transition-colors"
-                    placeholder="Doe"
-                    data-en="Doe"
-                    data-ar="أحمد"
+                    placeholder="Enter The Name"
+                    data-en="Last name"
+                    data-ar="الاسم الاخير"
                   />
                 </div>
               </div>
@@ -804,70 +804,174 @@
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/menu-filter.js"></script>
 
-    <script>
-      (function () {
-        "use strict";
-        var form = document.getElementById("contact-form");
-        if (!form) return;
+<!--
+  ════════════════════════════════════════════════════════
+  CONTACT PAGE — FIXED SCRIPT
+  
+  استبدل الـ <script> الأخير في pages/contact/index.html
+  (اللي فيه contact-form addEventListener) بالكود ده كامل
+  
+  كمان غيّر الـ form tag من:
+    <form id="contact-form" ... action="https://formsubmit.co/..." method="POST">
+  إلى:
+    <form id="contact-form" ... >
+  (امسح الـ action والـ method — مش محتاجينهم)
+  ════════════════════════════════════════════════════════
+-->
+<script>
+(function () {
+  'use strict';
 
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          var isAr = document.documentElement.lang === "ar";
-          var sendBtn = document.getElementById("contact-send-btn");
-          var name = (document.getElementById("c-firstname") || {}).value || "";
-          var msg = (document.getElementById("c-message") || {}).value || "";
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/wahadmomo@gmail.com';
 
-          if (!name.trim() || !msg.trim()) {
-            if (window.showSuccessToast) {
-              window.showSuccessToast(
-                isAr
-                  ? "يرجى ملء الاسم والرسالة"
-                  : "Please fill in your name and message.",
-              );
-            }
-            return;
+  function isAr() { return document.documentElement.lang === 'ar'; }
+
+  /* ── In-page toast (no browser alert) ── */
+  function showToast(msg, isError) {
+    var old = document.getElementById('brew-toast');
+    if (old) old.remove();
+    var t = document.createElement('div');
+    t.id = 'brew-toast';
+    t.style.cssText = [
+      'position:fixed',
+      'bottom:5rem',
+      'left:50%',
+      'transform:translateX(-50%)',
+      'background:' + (isError ? '#ba1a1a' : '#2c1810'),
+      'color:#ede8e3',
+      'padding:0.875rem 2rem',
+      'border-radius:0.5rem',
+      'font-family:"DM Mono",monospace',
+      'font-size:13px',
+      'z-index:9999',
+      'white-space:nowrap',
+      'box-shadow:0 4px 24px rgba(44,24,16,0.35)',
+      'pointer-events:none',
+      'transition:opacity 0.35s ease'
+    ].join(';');
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(function () { t.style.opacity = '0'; }, 3200);
+    setTimeout(function () { t.remove(); }, 3600);
+  }
+
+  /* ── FAQ Accordion ── */
+  document.querySelectorAll('[data-faq-item]').forEach(function (item) {
+    var trigger  = item.querySelector('[data-faq-trigger]');
+    var content  = item.querySelector('[data-faq-content]');
+    var icon     = item.querySelector('[data-faq-icon]');
+    if (!trigger || !content) return;
+
+    /* Start collapsed */
+    content.style.maxHeight  = '0';
+    content.style.overflow   = 'hidden';
+    content.style.transition = 'max-height 0.35s ease';
+
+    trigger.addEventListener('click', function () {
+      var isOpen = content.style.maxHeight !== '0px' && content.style.maxHeight !== '';
+      if (isOpen) {
+        content.style.maxHeight = '0';
+        if (icon) icon.style.transform = 'rotate(0deg)';
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+
+  /* ── Contact Form ── */
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var ar      = isAr();
+    var sendBtn = document.getElementById('contact-send-btn');
+
+    /* Collect values */
+    var firstName = ((document.getElementById('c-firstname') || {}).value || '').trim();
+    var lastName  = ((document.getElementById('c-lastname')  || {}).value || '').trim();
+    var email     = ((document.getElementById('c-email')     || {}).value || '').trim();
+    var inquiry   = ((document.getElementById('c-inquiry')   || {}).value || '');
+    var message   = ((document.getElementById('c-message')   || {}).value || '').trim();
+
+    /* Basic validation */
+    if (!firstName || !message) {
+      showToast(
+        ar ? '⚠ يرجى ملء الاسم والرسالة' : '⚠ Please fill in your name and message.',
+        true
+      );
+      return;
+    }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast(
+        ar ? '⚠ البريد الإلكتروني غير صحيح' : '⚠ Invalid email address.',
+        true
+      );
+      return;
+    }
+
+    /* Disable button */
+    var savedText = sendBtn.textContent;
+    sendBtn.disabled = true;
+    sendBtn.textContent = '⏳ ' + (ar ? 'جاري الإرسال...' : 'Sending...');
+
+    /* Send via FormSubmit AJAX (JSON mode — no CORS) */
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept'       : 'application/json'
+      },
+      body: JSON.stringify({
+        '_subject'            : 'رسالة جديدة — Roast & Ritual',
+        '_captcha'            : 'false',
+        'الاسم الأول'         : firstName,
+        'اسم العائلة'         : lastName  || '—',
+        'البريد الإلكتروني'   : email     || '—',
+        'نوع الاستفسار'       : inquiry   || '—',
+        'الرسالة'             : message,
+        'وقت الإرسال'         : new Date().toLocaleString('ar-EG')
+      })
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data.success === 'true' || data.success === true) {
+        /* ✅ Hide form — show success card */
+        form.style.display = 'none';
+        var successCard = document.getElementById('contact-success');
+        if (successCard) {
+          successCard.classList.remove('hidden');
+          /* Update success card text for current language */
+          var h3 = successCard.querySelector('[data-en]');
+          if (h3) {
+            h3.textContent = ar ? (h3.dataset.ar || h3.dataset.en) : h3.dataset.en;
           }
+        }
+        /* Also show toast */
+        showToast(
+          ar ? '✅ تم إرسال رسالتك بنجاح!' : '✅ Message sent successfully!',
+          false
+        );
+        form.reset();
+      } else {
+        throw new Error('FormSubmit returned failure');
+      }
+    })
+    .catch(function () {
+      /* ❌ Error — on-page toast only (no browser alert) */
+      showToast(
+        ar ? '❌ فشل الإرسال، حاول مرة أخرى' : '❌ Send failed, please try again.',
+        true
+      );
+    })
+    .finally(function () {
+      sendBtn.disabled = false;
+      sendBtn.textContent = savedText;
+    });
+  });
 
-          var originalText = sendBtn.textContent;
-          sendBtn.disabled = true;
-          sendBtn.textContent = "⏳ " + (isAr ? "جاري الإرسال..." : "Sending...");
-
-          fetch(form.action, {
-            method: form.method,
-            body: new FormData(form),
-            headers: {
-                'Accept': 'application/json'
-            }
-          })
-          .then(response => {
-            if (response.ok) {
-              form.style.display = "none";
-              var success = document.getElementById("contact-success");
-              if (success) success.classList.remove("hidden");
-              form.reset();
-              if (window.showSuccessToast) {
-                window.showSuccessToast(
-                  isAr ? "تم إرسال رسالتك بنجاح!" : "Message sent successfully!",
-                );
-              }
-            } else {
-              throw new Error('Network response was not ok');
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            alert(
-              isAr
-                ? "فشل الإرسال، حاول مرة أخرى"
-                : "Send failed, please try again.",
-            );
-          })
-          .finally(() => {
-            sendBtn.disabled = false;
-            sendBtn.textContent = originalText;
-          });
-        });
-      })();
-    </script>
+})();
+</script>
   </body>
 </html>
