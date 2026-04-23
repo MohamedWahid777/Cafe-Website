@@ -1,5 +1,4 @@
-# Brew & Soul — Specialty Café Website
-# بروّ آند سول — موقع المقهى المتخصص
+#  Café Website
 
 ---
 
