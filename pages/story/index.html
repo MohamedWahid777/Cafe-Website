@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="light" lang="ar" dir="rtl">
+<html class="light overflow-x-hidden" lang="ar" dir="rtl">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -69,7 +69,7 @@
     </style>
   </head>
 
-  <body class="bg-surface text-on-surface font-body antialiased">
+  <body class="bg-surface text-on-surface font-body antialiased overflow-x-hidden">
     <!-- ══ NAVBAR ══════════════════════════════════════════════════════════ -->
     <header id="main-nav">
       <div class="nav-inner">
@@ -187,19 +187,19 @@
     </div>
 
     <!-- ══ MAIN ════════════════════════════════════════════════════════════ -->
-    <main class="pt-32">
+    <main class="pt-32 overflow-x-hidden">
       <!-- ── Hero: Split Layout ── -->
       <section
-        class="min-h-[820px] flex flex-col md:flex-row px-8 md:px-16 lg:px-24 gap-12 md:gap-16 items-center py-16"
+        class="min-h-auto md:min-h-[820px] flex flex-col md:flex-row px-4 sm:px-6 md:px-16 lg:px-24 gap-8 md:gap-16 items-center py-10 md:py-16"
       >
         <div
-          class="w-full md:w-1/2 h-[500px] md:h-[820px] rounded-xl overflow-hidden shadow-[0_8px_40px_rgba(28,28,25,0.06)]"
+          class="w-full md:w-1/2 h-[300px] sm:h-[450px] md:h-[820px] rounded-xl overflow-hidden shadow-[0_8px_40px_rgba(28,28,25,0.06)]"
           data-aos="fade-right"
         >
           <img
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuApU6NGi1h5xLn295VkRIXZfKm9jlQZYirS7msd6U_XF2iIrHfWDjzWZVOGKBYw6oV5mswPJOFFbGqQypCaVSZrNPMH2TXMyhcbWmPBDa3MhvOio7hByUSC3_Kvf4lXCTrEnkuxnwRuUgGArE5l33x0kBPlwo1PQP0lOy0431YBMsivX0wur0vf_QCe6VtGtadKvpzU4JwCGTF9x9ftCfU0d2pBmXUNo3kjFGFsW-s8EJr1xhxBtF9bEAK1h6zI1hfUxkjojIe9x_Y"
             alt="Barista pouring latte art in warm café lighting"
-            class="w-full h-full object-cover"
+            class="w-full h-auto object-cover"
           />
         </div>
 
@@ -215,7 +215,7 @@
             >The Genesis</span
           >
           <h1
-            class="font-headline text-5xl md:text-7xl font-bold tracking-tight text-primary-container leading-none mb-8"
+            class="font-headline text-3xl sm:text-4xl md:text-7xl font-bold tracking-tight text-primary-container leading-none mb-6 md:mb-8"
           >
             <span class="block" data-en="Rooted in" data-ar="متخصص في"
               >Rooted in</span
@@ -228,7 +228,7 @@
             >
           </h1>
           <div
-            class="space-y-5 text-on-surface-variant font-body text-lg leading-relaxed"
+            class="space-y-4 md:space-y-5 text-on-surface-variant font-body text-base md:text-lg leading-relaxed"
           >
             <p
               data-en="In the heart of Cairo's vibrant pulse, we found our calling: to curate a space where time slows down. Roast &amp; Ritual was born from a desire to reclaim the sacred pause that a perfect cup affords."
@@ -244,23 +244,12 @@
               data-ar="نحن نؤمن بأن القهوة هي أكثر من مجرد مشروب؛ إنها صلة عميقة بالأرض ومحفز للألفة الإنسانية. مساحتنا هي دعوة للحضور، حيث تمثل رائحة الحبوب المطحونة طازجاً الانتقال من الفوضى إلى الصفاء."
             >
               We believe coffee is more than just a beverage; it is a profound
-              connection to the earth and a catalyst for human intimacy. Our
-              space is an invitation to be present, where the aroma of freshly
-              ground beans marks the transition from chaos to clarity.
-            </p>
-            <p
-              data-en="Our journey is a continuous love letter to the craft. We obsess over the nuance of every roast, not out of vanity, but because we believe a truly exceptional cup honors the hands that nurtured the harvest."
-              data-ar="رحلتنا هي رسالة حب مستمرة للحرفة. نحن نهتم بكل تفاصيل التحميص، ليس من قبيل الغرور، ولكن لأننا نؤمن بأن الكوب الاستثنائي حقاً يكرم الأيدي التي رعت المحصول."
-            >
-              Our journey is a continuous love letter to the craft. We obsess
-              over the nuance of every roast, not out of vanity, but because we
-              believe a truly exceptional cup honors the hands that nurtured the
-              harvest.
+              connection to the earth and a catalyst for human intimacy.
             </p>
           </div>
           <a
             href="../menu/index.html"
-            class="inline-flex items-center mt-10 text-primary-container font-body font-medium hover:text-secondary transition-colors border-b border-primary-container/20 hover:border-secondary pb-1 w-fit"
+            class="w-full sm:w-fit justify-center inline-flex items-center mt-8 md:mt-10 text-primary-container font-body font-medium hover:text-secondary transition-colors border-b border-primary-container/20 hover:border-secondary pb-1"
           >
             <span data-en="Explore Our Menu" data-ar="استكشف قائمتنا"
               >Explore Our Menu</span
@@ -273,18 +262,18 @@
       </section>
 
       <!-- ── Our Values ── -->
-      <section class="py-24 px-8 md:px-16 lg:px-24 bg-surface mt-32">
+      <section class="py-16 md:py-24 px-4 sm:px-6 md:px-16 lg:px-24 bg-surface mt-20 md:mt-32">
         <div class="max-w-7xl mx-auto">
-          <div class="text-center mb-16" data-aos="fade-up">
+          <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
             <h2
-              class="font-headline text-4xl text-primary-container mb-4"
+              class="font-headline text-3xl sm:text-4xl text-primary-container mb-4"
               data-en="Our Values"
               data-ar="قيمنا"
             >
               Our Values
             </h2>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 text-center">
             <div data-aos="fade-up" data-aos-delay="0">
               <div
                 class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center mx-auto mb-4"
@@ -370,9 +359,9 @@
 
     <!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
     <footer
-      class="bg-[#2C1810] text-[#F5ECD7] font-body text-sm py-20 px-8 md:px-12"
+      class="bg-[#2C1810] text-[#F5ECD7] font-body text-sm py-16 md:py-20 px-4 sm:px-8 md:px-12"
     >
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
         <div>
           <div class="font-headline text-3xl text-[#735a36] mb-4">Café</div>
           <p class="text-stone-400 mt-4">

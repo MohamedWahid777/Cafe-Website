@@ -220,14 +220,16 @@
 
     <!-- ══ HERO ════════════════════════════════════════════════════════════ -->
     <section
-      class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden"
+      class="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-24 overflow-hidden"
     >
-      <!-- Split background -->
+      <!-- Split background: Full surface on mobile (light mode), split on desktop -->
       <div class="absolute inset-0 z-0 flex">
         <div
-          class="w-1/2 h-full bg-gradient-to-br from-primary to-primary-container"
+          class="w-full md:w-1/2 h-full bg-surface-container-low md:bg-gradient-to-br md:from-primary md:to-primary-container"
         ></div>
-        <div class="w-1/2 h-full bg-surface-container-low"></div>
+        <div
+          class="hidden md:block w-1/2 h-full bg-surface-container-low"
+        ></div>
       </div>
 
       <div
@@ -235,11 +237,11 @@
       >
         <!-- Left: Text -->
         <div
-          class="w-full md:w-5/12 text-on-primary pl-0 md:pl-8"
+          class="w-full md:w-5/12 text-on-surface md:text-on-primary pl-0 md:pl-8"
           data-aos="fade-right"
         >
           <h1
-            class="font-headline text-5xl md:text-7xl font-light tracking-wider leading-tight mb-6"
+            class="font-headline text-4xl sm:text-5xl md:text-7xl font-light tracking-wider leading-tight mb-6"
           >
             <span class="block" data-en="Your coffee" data-ar="قهوتك"
               >Your coffee</span
@@ -252,14 +254,14 @@
             >
           </h1>
           <p
-            class="font-body text-lg text-surface-variant/80 max-w-md mb-4 font-light leading-relaxed"
+            class="font-body text-base md:text-lg text-on-surface-variant md:text-surface-variant/80 max-w-md mb-4 font-light leading-relaxed"
             data-en="Where every cup is a profound meditation on flavor and origin."
             data-ar="حيث كل كوب هو تأمل عميق في النكهة والأصل."
           >
             Where every cup is a profound meditation on flavor and origin.
           </p>
           <p
-            class="font-body text-base text-surface-variant/70 max-w-md mb-10 font-light leading-relaxed"
+            class="font-body text-sm md:text-base text-on-surface-variant/80 md:text-surface-variant/70 max-w-md mb-10 font-light leading-relaxed"
             data-en="Step into a sanctuary of slow-brewed elegance. We honor the bean through a meticulous ritual of roasting and extraction, transforming the daily routine into an extraordinary sensory journey."
             data-ar="ادخل إلى ملاذ من الأناقة المحضرة بتمهل. نحن نكرم حبة البن من خلال طقوس دقيقة من التحميص والاستخلاص، لنحول روتينك اليومي إلى رحلة حسية استثنائية."
           >
@@ -270,14 +272,14 @@
           <div class="flex flex-wrap gap-4 items-center">
             <a
               href="pages/menu/index.html"
-              class="bg-surface text-primary-container px-8 py-3 rounded-md hover:bg-surface-variant transition-colors duration-300 font-body tracking-wide font-medium"
+              class="w-full sm:w-auto text-center bg-primary-container text-on-primary md:bg-surface md:text-primary-container px-8 py-3 rounded-md hover:opacity-90 transition-all duration-300 font-body tracking-wide font-medium"
               data-en="Explore Menu"
               data-ar="استكشف القائمة"
               >Explore Menu</a
             >
             <a
               href="pages/reservation/index.html"
-              class="text-on-primary px-8 py-3 rounded-md border border-outline-variant/30 hover:border-surface transition-colors duration-300 font-body tracking-wide"
+              class="w-full sm:w-auto text-center text-on-surface md:text-on-primary px-8 py-3 rounded-md border border-outline-variant/30 md:border-outline-variant/30 hover:border-primary-container transition-all duration-300 font-body tracking-wide"
               data-en="Book a Table"
               data-ar="احجز طاولة"
               >Book a Table</a
@@ -305,8 +307,8 @@
     </section>
 
     <!-- ══ CURATED SELECTIONS ══════════════════════════════════════════════ -->
-    <section class="py-32 bg-surface-container-low relative">
-      <div class="container mx-auto px-6">
+    <section class="py-20 md:py-32 bg-surface-container-low relative">
+      <div class="container mx-auto px-4 sm:px-6">
         <div
           class="flex flex-col md:flex-row justify-between items-end mb-20"
           data-aos="fade-up"
@@ -658,7 +660,7 @@
 
     <!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
     <footer
-      class="bg-[#2C1810] text-[#F5ECD7] font-body text-sm py-20 px-8 md:px-12"
+      class="bg-[#2C1810] text-[#F5ECD7] font-body text-sm py-16 md:py-20 px-4 sm:px-8 md:px-12"
     >
       <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
         <div>

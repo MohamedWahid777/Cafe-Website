@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="light" lang="ar" dir="rtl">
+<html class="light overflow-x-hidden" lang="ar" dir="rtl">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -72,7 +72,7 @@
     </style>
   </head>
 
-  <body class="bg-surface text-on-surface font-body antialiased">
+  <body class="bg-surface text-on-surface font-body antialiased overflow-x-hidden">
     <!-- ══ NAVBAR ══════════════════════════════════════════════════════════ -->
     <header id="main-nav">
       <div class="nav-inner">
@@ -190,15 +190,15 @@
     </div>
 
     <!-- ══ MAIN ════════════════════════════════════════════════════════════ -->
-    <main class="pt-32 pb-0">
+    <main class="pt-32 pb-0 overflow-x-hidden">
       <!-- ── Contact Section ── -->
-      <section class="py-16 md:py-24 px-6 md:px-12 lg:px-24">
+      <section class="py-10 md:py-24 px-4 sm:px-6 md:px-12 lg:px-24">
         <div
-          class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-start"
+          class="max-w-7xl mx-auto flex flex-col md:flex-row gap-8 md:gap-16 items-start"
         >
           <!-- Left: Header + Form -->
           <div class="w-full md:w-7/12 z-10">
-            <div class="mb-12" data-aos="fade-up">
+            <div class="mb-10 md:mb-12" data-aos="fade-up">
               <span
                 class="font-label text-secondary text-xs tracking-widest uppercase mb-4 block"
                 data-en="Get in Touch"
@@ -206,7 +206,7 @@
                 >Get in Touch</span
               >
               <h1
-                class="font-headline text-5xl md:text-7xl font-bold leading-tight tracking-tight text-primary-container mb-6"
+                class="font-headline text-3xl sm:text-5xl md:text-7xl font-bold leading-tight tracking-tight text-primary-container mb-6"
               >
                 <span class="block" data-en="Let's Talk" data-ar="دعنا نتحدث"
                   >Let's Talk</span
@@ -216,7 +216,7 @@
                 >
               </h1>
               <p
-                class="font-body text-on-surface-variant text-lg max-w-md leading-relaxed"
+                class="font-body text-on-surface-variant text-base md:text-lg max-w-md leading-relaxed"
                 data-en="Whether you have a question about our roasting process, wholesale inquiries, or just want to say hello — we're here to listen."
                 data-ar="سواء كان لديك سؤال حول عملية التحميص، أو استفسارات حول البيع بالجملة، أو كنت ترغب فقط في قول مرحبًا — نحن هنا للاستماع."
               >
@@ -229,7 +229,7 @@
             <!-- Contact Form -->
             <form
               id="contact-form"
-              class="space-y-6 bg-surface-container-lowest p-8 md:p-10 rounded-xl border border-outline-variant/15 shadow-[0_8px_40px_-12px_rgba(28,28,25,0.06)]"
+              class="space-y-6 bg-surface-container-lowest p-5 sm:p-8 md:p-10 rounded-xl border border-outline-variant/15 shadow-[0_8px_40px_-12px_rgba(28,28,25,0.06)]"
               action="https://formsubmit.co/wahadmomo@gmail.com"
               method="POST"
               data-aos="fade-up"
@@ -237,7 +237,7 @@
             >
               <input type="hidden" name="_captcha" value="false">
               <input type="hidden" name="_subject" value="New Contact Message - Brew & Soul">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="space-y-2">
                   <label
                     class="font-label text-xs text-on-surface-variant uppercase tracking-wider"
@@ -378,7 +378,7 @@
                 >mark_email_read</span
               >
               <h3
-                class="font-headline text-2xl text-primary-container mb-3"
+                class="font-headline text-xl sm:text-2xl text-primary-container mb-3"
                 data-en="Message sent successfully!"
                 data-ar="تم إرسال رسالتك بنجاح!"
               >
@@ -406,7 +406,7 @@
               <img
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBDbJ-tMrnSFClfcKsaKBxnLTFxl90ju-y_S2b7-86MZO0rzB7EG_GtwQyG2cCySOBOdFc5h89C6IYWsOff_qcpcZimukJMz_167yPFyJsicJsaOhTSj0bXUmn7Rgwer23y11gPUTU_c-OEwFAAgehVmD4YLc7PBKOXzOsuEbWf2Ci77OC55R1IH5KGRjaGL4Vup4G_pyN_A5RgarIFpWso_zVTWpe1Q5Dc9oSqzaMQKJhM1mdEjO9GSrr07Rg0k7oiBwHcsfurME"
                 alt="Artisan pour over coffee brewing process"
-                class="w-full h-full object-cover"
+                class="w-full h-auto object-cover"
               />
               <div
                 class="absolute inset-0 bg-gradient-to-t from-primary-container/70 via-transparent to-transparent"
@@ -415,7 +415,7 @@
 
             <!-- ══ VISIT US CARD (replaces map) ══ -->
             <div
-              class="bg-surface-container-low rounded-xl p-8 flex flex-col gap-5 relative overflow-hidden"
+              class="bg-surface-container-low rounded-xl p-5 sm:p-8 flex flex-col gap-5 relative overflow-hidden"
             >
               <!-- Decorative glow -->
               <div
@@ -572,9 +572,9 @@
 
     <!-- ══ FOOTER ══════════════════════════════════════════════════════════ -->
     <footer
-      class="bg-[#2C1810] text-[#F5ECD7] font-body text-sm py-20 px-8 md:px-12"
+      class="bg-[#2C1810] text-[#F5ECD7] font-body text-sm py-16 md:py-20 px-4 sm:px-8 md:px-12"
     >
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
         <div>
           <div class="font-headline text-3xl text-[#735a36] mb-4">Café</div>
           <p class="text-stone-400 mt-4">
